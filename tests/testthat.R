@@ -1,4 +1,4 @@
 library(testthat)
-library(projects)
+library(projectsetup)
 
-test_check("projects")
+test_check("projectsetup")

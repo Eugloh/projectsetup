@@ -33,7 +33,7 @@ if (getRversion() >= "2.15.1") utils::globalVariables(c(".", ":="))
 #'   multiple project folder templates for different situations.
 #'
 #'   The default templates are in the folder located at the path produced by
-#'   running: \code{\link{system.file}("templates", package = "projects")}
+#'   running: \code{\link{system.file}("templates", package = "projectsetup")}
 #'
 #' @section Behavior when projects folder already exists: If \code{overwrite =
 #'   TRUE}, the function will run no matter what. Use with caution.
@@ -303,7 +303,7 @@ restore_templates <- function(projects_folder_path) {
             system.file(
               "templates",
               template_source,
-              package = "projects",
+              package = "projectsetup",
               mustWork = TRUE
             )
 

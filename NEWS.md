@@ -1,5 +1,9 @@
 
-# projects 2.1.99.9990
+# projectsetup 2.1.99.9990
+
+## Usage for my own project:
+
+- Fork of the 'projects' package on 5 October 2023.
 
 ## Major update:
 

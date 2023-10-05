@@ -531,7 +531,7 @@ open_project <- function(project, new_session = FALSE, archived = FALSE) {
         system.file(
           "templates",
           "pXXXX.Rproj",
-          package = "projects",
+          package = "projectsetup",
           mustWork = TRUE
         )
 

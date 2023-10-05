@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# projects
+# projectsetup
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/projects)](https://cran.r-project.org/package=projects)
 ![CRAN\_Download\_Counter](http://cranlogs.r-pkg.org/badges/grand-total/projects)
@@ -37,26 +37,26 @@ Health.
 
 ### Installation
 
-You can install `projects` with:
+You can install `projectsetup` with:
 
 ``` r
-install.packages("projects")
+install.packages("projectsetup")
 ```
 
 ## Introduction
 
-The goal of the `projects` R package is to provide a set of tools that
+The goal of the `projectsetup` R package is to provide a set of tools that
 support an efficient project management workflow for statisticians and
 data scientists who perform reproducible research within team science
-environments. The `projects` package is built upon some existing tools
+environments. The `projectsetup` package is built upon some existing tools
 for reproducible research, particularly RStudio, the R integrated
 development environment in which it dwells, and R Markdown, the file
 structure that allows users to assemble datasets, to perform analyses
-and to write manuscripts in a single file. The `projects` package is
+and to write manuscripts in a single file. The `projectsetup` package is
 oriented towards efficient and reproducible academic research manuscript
 development and incorporates protocol and analysis templates based on
 widely-accepted reporting guidelines (viz., CONSORT and STROBE). When
-used on a shared file system (e.g., a server), the `projects` package
+used on a shared file system (e.g., a server), the `projectsetup` package
 provides infrastructure for collaborative research: multiple researchers
 can work on the same project and keep track of its progress without
 having to request updates.
@@ -79,7 +79,7 @@ The primary features of the projects R package are the following:
   - Organization and management functionality, including the ability to
     group, archive and delete projects.
 
-At its outset, the `projects` package creates a folder called
+At its outset, the `projectsetup` package creates a folder called
 */projects* in a user-specified location. This directory will contain
 all research projects created and maintained by the user. The
 */projects* folder will also contain a relational database of the
@@ -93,7 +93,7 @@ guide the project workflow (e.g., a “data” subfolder; a “datawork” R
 Markdown template). Right away, users can begin working on the research
 project and edit the metadata of the project itself and its authors. To
 lessen the burden of the mundane details of manuscript writing, the
-`projects` package can output lines to the console that, when copied
+`projectsetup` package can output lines to the console that, when copied
 into an R Markdown file, generates a title page with all relevant
 authorship information of any given project. Finally, since users may
 create dozens of projects over time, users can run functions to organize
@@ -174,14 +174,14 @@ creation, keeping the process in reproducible environments for as long
 as possible and otherwise documenting significant changes and
 alterations.
 
-## The `projects` package
+## The `projectsetup` package
 
 ### Initial Setup
 
-All projects that the user creates with the `projects` package—as well
+All projects that the user creates with the `projectsetup` package—as well
 as its infrastructure—reside in a main folder called */projects*. Users
 need not manually create this directory, and in fact they are encouraged
-not to manually manipulate any folders that the `projects` package
+not to manually manipulate any folders that the `projectsetup` package
 involves. Instead, users run the function `setup_projects()`, providing
 the full file path of the directory in which the user wants the
 */projects* folder to reside.
@@ -207,15 +207,15 @@ affiliations (see the **Internal Tables** section).
 
   - `id` – an identification number, specifically an integer, unique
     among the other projects. This number can be used whenever needing
-    to identify this project within `projects` package functions.
+    to identify this project within `projectsetup` package functions.
   - `title` – the title of the project. A nonambiguous substring of
     `title` (i.e., a substring that does not match any other project)
     can be used whenever needing to identify this project within
-    `projects` package functions.
+    `projectsetup` package functions.
   - `short_title` – an optional unique nickname for the project. A
     nonambiguous substring of `short_title` (i.e., a substring that does
     not match any other project) can be used whenever needing to
-    identify this project within `projects` package functions. This is
+    identify this project within `projectsetup` package functions. This is
     useful if users cannot remember the long, formal project `title` nor
     the project `id`.
   - `current_owner` – the `id` of the author who is responsible for
@@ -252,17 +252,17 @@ affiliations (see the **Internal Tables** section).
 
   - `id` – an identification number, specifically an integer, unique
     among the other authors. This number can be used whenever needing to
-    identify this author within `projects` package functions.
+    identify this author within `projectsetup` package functions.
   - `given_names` – the given name or names of the author. A
     nonambiguous substring of `given_names` (i.e., a substring that does
     not match any other author) can be used whenever needing to identify
-    this author within `projects` package functions. This is included in
+    this author within `projectsetup` package functions. This is included in
     the automatically generated title pages of the projects associated
     with this author.
   - `last_name` – the last name or names of the author. A nonambiguous
     substring of `last_name` (i.e., a substring that does not match any
     other author) can be used whenever needing to identify this author
-    within `projects` package functions. This is included after
+    within `projectsetup` package functions. This is included after
     `given_names` in the automatically generated title pages of the
     projects associated with this author.
   - `title` – the job title of the author.
@@ -282,19 +282,19 @@ affiliations (see the **Internal Tables** section).
 
   - `id` – an identification number, specifically an integer, unique
     among the other affiliations. This number can be used whenever
-    needing to identify this affiliation within `projects` package
+    needing to identify this affiliation within `projectsetup` package
     functions.
   - `department_name` – the department name of the affiliation. A
     nonambiguous substring of `department_name` (i.e., a substring that
     does not match any other affiliation) can be used whenever needing
-    to identify this affiliation within `projects` package functions.
+    to identify this affiliation within `projectsetup` package functions.
     This is included in the affiliations section of the automatically
     generated title page of projects associated with authors with this
     affiliation.
   - `institution_name` – the name of the overall institution of the
     affiliation. A nonambiguous substring of `institution_name` (i.e., a
     substring that does not match any other affiliation) can be used
-    whenever needing to identify this affiliation within `projects`
+    whenever needing to identify this affiliation within `projectsetup`
     package functions. This is included after `department_name` in the
     affiliations section of the automatically generated title page of
     projects associated with authors with this affiliation.
@@ -329,7 +329,7 @@ In keeping with relational database theory, there are two *.rds* files
 that keep track of the many-to-many relationships between projects and
 authors and between authors and affiliations. Each has two columns,
 `id1` and `id2`, that contain the `id` numbers of these items. Each row
-of this table describes an association. Furthermore, the `projects`
+of this table describes an association. Furthermore, the `projectsetup`
 package keeps track of the order in which these associations appear so
 that the automatically generated title pages list authors and
 affiliations in the correct order. Users are able to run functions to
@@ -371,22 +371,22 @@ implementation of these features for the user.
 
 ### File Management
 
-The goal of the `projects` package is to provide a comprehensive set of
+The goal of the `projectsetup` package is to provide a comprehensive set of
 tools managing project files in a way that is self-contained in R and
 independent of the underlying operating system. On a daily basis,
 researchers make, move, copy, delete and archive files. Through the
-`projects` package, researchers can perform all these actions in an
+`projectsetup` package, researchers can perform all these actions in an
 organized manner with an automated file structure. In fact, users are
 advised not to manipulate the */projects* folder and its content with
 their operating system, so that the package does not lose track of these
-files. Multiuser application of `projects` requires a server or an
+files. Multiuser application of `projectsetup` requires a server or an
 otherwise shared directory where multiple users can access the
 */projects* folder. File-managing functions—along with all functions—are
 demonstrated below in the **Demonstration** section.
 
 # Demonstration
 
-Upon installation, the `projects` package must be set up using
+Upon installation, the `projectsetup` package must be set up using
 `setup_projects()`. The user is to input the file path of the directory
 wherein the */projects* folder is to be located.
 
@@ -422,7 +422,7 @@ new_affiliation(
 ```
 
 This affiliation has been successfully added to the “affiliations” table
-in the `projects` relational database. Now to create a few more
+in the `projectsetup` relational database. Now to create a few more
 affiliations:
 
 ``` r
@@ -453,7 +453,7 @@ new_affiliation(
 Note that we chose a specific `id` number (50) for the affiliation
 called the “Impossibles Investigation Team.”
 
-Now we are ready to add authors to the “authors” table of the `projects`
+Now we are ready to add authors to the “authors” table of the `projectsetup`
 database.
 
 ``` r
@@ -1086,14 +1086,14 @@ delete_task(project = 4, TID = 1)
 
 # Conclusions
 
-The `projects` package provides a comprehensive set of tools for
+The `projectsetup` package provides a comprehensive set of tools for
 reproducible team science workflows. Efficiency in project management,
 including manuscript development, is facilitated by an internal database
 that keeps record of project details as well as team members’
 affiliations and contact information. For manuscripts, title pages are
 automatically generated from this database, and a selection of
 manuscript outlines compliant with reporting guidelines are available in
-R Markdown format. We believe that the `projects` package may be useful
+R Markdown format. We believe that the `projectsetup` package may be useful
 for teams that manage multiple collaborative research projects in
 various stages of development.
 

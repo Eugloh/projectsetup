@@ -69,7 +69,7 @@ file that R will not notice or use. See \link{Startup} for more details.
   multiple project folder templates for different situations.
 
   The default templates are in the folder located at the path produced by
-  running: \code{\link{system.file}("templates", package = "projects")}
+  running: \code{\link{system.file}("templates", package = "projectsetup")}
 }
 
 \section{Behavior when projects folder already exists}{
