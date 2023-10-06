@@ -9,15 +9,15 @@ local({
     id            = integer(),
     title         = character(),
     short_title   = character(),
-    current_owner = projects:::new_projects_author(),
+    current_owner = projectsetup:::new_projects_author(),
     status        = character(),
     deadline_type = character(),
     deadline      = lubridate::as_datetime(character()),
-    stage         = projects:::new_projects_stage(),
+    stage         = projectsetup:::new_projects_stage(),
     impact        = numeric(),
     path          = character(),
-    corresp_auth  = projects:::new_projects_author(),
-    creator       = projects:::new_projects_author()
+    corresp_auth  = projectsetup:::new_projects_author(),
+    creator       = projectsetup:::new_projects_author()
   )
 
 tasks_ptype <-
@@ -28,7 +28,7 @@ tasks_ptype <-
     task = character(),
     effort = double(),
     timing = double(),
-    lead = projects:::new_projects_author(),
+    lead = projectsetup:::new_projects_author(),
     status = character()
   )
 

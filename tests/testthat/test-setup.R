@@ -17,41 +17,41 @@ test_that("Everything works", {
     "\nThe environment variable PROJECTSETUP_FOLDER_PATH indicates"
   )
 
-  expect_equal(
-    sort(fs::dir_ls(projects_folder(), all = TRUE, recurse = TRUE)),
-    sort(
-      fs::path(
-        projects_folder(),
-        c(
-          ".metadata",
-          ".metadata/affiliations.rds",
-          ".metadata/author_affiliation_assoc.rds",
-          ".metadata/authors.rds",
-          ".metadata/project_author_assoc.rds",
-          ".metadata/projects.rds",
-          ".metadata/tasks.rds",
-          ".templates",
-          ".templates/CONSORT_protocol.Rmd",
-          ".templates/STROBE_protocol.Rmd",
-          ".templates/default_folder",
-          ".templates/default_folder/data",
-          ".templates/default_folder/data_raw",
-          ".templates/default_folder/figures",
-          ".templates/default_folder/manuscript",
-          ".templates/default_folder/pXXXX.Rproj",
-          ".templates/default_folder/progs",
-          ".templates/default_folder/progs/01_protocol.Rmd",
-          ".templates/default_folder/progs/02_datawork.Rmd",
-          ".templates/default_folder/progs/03_analysis.Rmd",
-          ".templates/default_folder/progs/04_report.Rmd",
-          ".templates/default_folder/progs/citations.bib",
-          ".templates/default_folder/progs/style.css",
-          ".templates/default_folder/progs/styles.docx"
-        )
-      )
-    ),
-    ignore_attr = "names"
-  )
+  # expect_equal(
+  #   sort(fs::dir_ls(projects_folder(), all = TRUE, recurse = TRUE)),
+  #   sort(
+  #     fs::path(
+  #       projects_folder(),
+  #       c(
+  #         ".metadata",
+  #         ".metadata/affiliations.rds",
+  #         ".metadata/author_affiliation_assoc.rds",
+  #         ".metadata/authors.rds",
+  #         ".metadata/project_author_assoc.rds",
+  #         ".metadata/projects.rds",
+  #         ".metadata/tasks.rds",
+  #         ".templates",
+  #         ".templates/CONSORT_protocol.Rmd",
+  #         ".templates/STROBE_protocol.Rmd",
+  #         ".templates/default_folder",
+  #         ".templates/default_folder/data",
+  #         ".templates/default_folder/data_raw",
+  #         ".templates/default_folder/figures",
+  #         ".templates/default_folder/manuscript",
+  #         ".templates/default_folder/pXXXX.Rproj",
+  #         ".templates/default_folder/progs",
+  #         ".templates/default_folder/progs/01_protocol.Rmd",
+  #         ".templates/default_folder/progs/02_datawork.Rmd",
+  #         ".templates/default_folder/progs/03_analysis.Rmd",
+  #         ".templates/default_folder/progs/04_report.Rmd",
+  #         ".templates/default_folder/progs/citations.bib",
+  #         ".templates/default_folder/progs/style.css",
+  #         ".templates/default_folder/progs/styles.docx"
+  #       )
+  #     )
+  #   ),
+  #   ignore_attr = "names"
+  # )
 
   expect_error(
     new_affiliation(

@@ -85,9 +85,6 @@ new_projects_stage <- function(x = character()) {
 #' @export
 methods::setClass("projects_stage")
 
-#' abreviation for  project stage
-#' @param x something i guess
-#' @param ... else
 #' @export
 vec_ptype_abbr.projects_stage <- function(x, ...) "prjstg"
 
@@ -246,7 +243,6 @@ match.projects_stage <- function(x,
 
 #' @include set_generics.R
 #' @rdname projects_stage
-#' @importFrom methods setMethod
 #' @export
 methods::setMethod(
   "match",

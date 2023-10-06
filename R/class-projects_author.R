@@ -110,9 +110,6 @@ new_projects_author <- function(x = character()) {
 methods::setClass("projects_author")
 
 
-#' abreviation for  project author
-#' @param x something i guess
-#' @param ... else
 #' @export
 vec_ptype_abbr.projects_author <- function(x, ...) "prjaut"
 

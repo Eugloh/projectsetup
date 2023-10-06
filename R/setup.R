@@ -242,8 +242,8 @@ create_projects_folder <- function(projects_folder_path) {
       c("data", "data_raw", "progs", "figures", "manuscript")
     )
   )
-  restore_templates(projects_folder_path)
-  restore_metadata(projects_folder_path)
+   restore_templates(projects_folder_path)
+   restore_metadata(projects_folder_path)
 }
 
 
@@ -313,7 +313,52 @@ restore_templates <- function(projects_folder_path) {
   )
 }
 
-
+restore_templates_2 <- function(projects_folder_path) {
+  purrr::pwalk(
+    .l =
+      list(
+        template_name =
+          c(
+            "copy_Parent.qmd" ,
+            "copy_QC.qmd" ,
+            "copy_DA.qmd" ,
+            "copy_DS.qmd"  
+          ),
+        template_source =
+          c(
+            "copy_Parent.qmd" ,
+            "copy_QC.qmd" ,
+            "copy_DA.qmd" ,
+            "copy_DS.qmd"  
+          ),
+        subfolder =
+          c("default_folder/progs",
+            "default_folder/progs",
+            "default_folder/progs",
+            "default_folder/progs"
+          )
+      ),
+    .f =
+      function(template_name, template_source, subfolder) {
+        
+        template_path <-
+          fs::path(projects_folder_path, ".templates", subfolder, template_name)
+        
+        if (!fs::file_exists(template_path)) {
+          
+          template_source <-
+            system.file(
+              "report",
+              template_source,
+              package = "R.AnalytiCyte",
+              mustWork = TRUE
+            )
+          
+          fs::file_copy(template_source, template_path)
+        }
+      }
+  )
+}
 
 restore_metadata <- function(p_path) {
   purrr::iwalk(
