@@ -12,7 +12,7 @@ via \code{\link{setup_projects}()}.
 }
 \details{
 The file path is returned as a simple character string. It simply returns the
-value of \code{\link{Sys.getenv}("PROJECTS_FOLDER_PATH")}, provided
+value of \code{\link{Sys.getenv}("PROJECTSETUP_FOLDER_PATH")}, provided
 that its value is a file path of a directory that actually exists (i.e.,
 \code{\link{setup_projects}()} has been successfully run).
 

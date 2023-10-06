@@ -43,7 +43,7 @@ Creates or restores the projects folder at the user-specified path.
 The \code{\link[=projects-package]{projects}} package remembers where the
 \link[=projects_folder]{projects folder} is located by storing its file path
 in a \link{.Renviron} file (the home .Renviron file by default). The entry is
-named \code{PROJECTS_FOLDER_PATH}.
+named \code{PROJECTSETUP_FOLDER_PATH}.
 
 Note that changing the \code{.Renviron_path} argument may create an .Renviron
 file that R will not notice or use. See \link{Startup} for more details.
@@ -81,7 +81,7 @@ file that R will not notice or use. See \link{Startup} for more details.
   will be deleted.
 
   \strong{Therefore}, if the user "broke" the projects folder (e.g., by
-  deleting metadata; by changing the "PROJECTS_FOLDER_PATH" line in the
+  deleting metadata; by changing the "PROJECTSETUP_FOLDER_PATH" line in the
   \emph{.Renviron} file), the user can "fix" the projects folder to some
   degree by running this function with the folder's actual file path (e.g.,
   restore all default templates; restore missing metadata files).
@@ -93,11 +93,11 @@ file that R will not notice or use. See \link{Startup} for more details.
 # Any existing "projects" folder is left totally untouched,
 # and the user's home directory and .Renviron file are also left untouched.
 old_home  <- Sys.getenv("HOME")
-old_ppath <- Sys.getenv("PROJECTS_FOLDER_PATH")
+old_ppath <- Sys.getenv("PROJECTSETUP_FOLDER_PATH")
 temp_dir <- tempfile("dir")
 dir.create(temp_dir)
 Sys.setenv(HOME = temp_dir)
-Sys.unsetenv("PROJECTS_FOLDER_PATH")
+Sys.unsetenv("PROJECTSETUP_FOLDER_PATH")
 #############################################################################
 
 # Creating the projects folder
@@ -133,7 +133,7 @@ if (interactive()) {
 #############################################################################
 # Cleanup
 # (or, the user can just restart R)
-Sys.setenv(HOME = old_home, PROJECTS_FOLDER_PATH = old_ppath)
+Sys.setenv(HOME = old_home, PROJECTSETUP_FOLDER_PATH = old_ppath)
 #############################################################################
 }
 \seealso{

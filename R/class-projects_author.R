@@ -53,10 +53,10 @@
 #' #############################################################################
 #' # SETUP
 #' old_home <- Sys.getenv("HOME")
-#' old_ppath <- Sys.getenv("PROJECTS_FOLDER_PATH")
+#' old_ppath <- Sys.getenv("PROJECTSETUP_FOLDER_PATH")
 #' temp_dir <- tempfile("dir")
 #' dir.create(temp_dir)
-#' Sys.unsetenv("PROJECTS_FOLDER_PATH")
+#' Sys.unsetenv("PROJECTSETUP_FOLDER_PATH")
 #' Sys.setenv(HOME = temp_dir)
 #' setup_projects(path = temp_dir)
 #' new_author("chuck", "jonesman", id = 33)
@@ -83,7 +83,7 @@
 #'
 #' #############################################################################
 #' # Cleanup (or just restart R)
-#' Sys.setenv(HOME = old_home, PROJECTS_FOLDER_PATH = old_ppath)
+#' Sys.setenv(HOME = old_home, PROJECTSETUP_FOLDER_PATH = old_ppath)
 #' @import vctrs
 #' @export
 projects_author <- function(x = character()) {
@@ -109,6 +109,10 @@ new_projects_author <- function(x = character()) {
 #' @export
 methods::setClass("projects_author")
 
+
+#' abreviation for  project author
+#' @param x something i guess
+#' @param ... else
 #' @export
 vec_ptype_abbr.projects_author <- function(x, ...) "prjaut"
 

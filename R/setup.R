@@ -8,7 +8,7 @@ if (getRversion() >= "2.15.1") utils::globalVariables(c(".", ":="))
 #' The \code{\link[=projects-package]{projects}} package remembers where the
 #' \link[=projects_folder]{projects folder} is located by storing its file path
 #' in a \link{.Renviron} file (the home .Renviron file by default). The entry is
-#' named \code{PROJECTS_FOLDER_PATH}.
+#' named \code{PROJECTSETUP_FOLDER_PATH}.
 #'
 #' Note that changing the \code{.Renviron_path} argument may create an .Renviron
 #' file that R will not notice or use. See \link{Startup} for more details.
@@ -43,7 +43,7 @@ if (getRversion() >= "2.15.1") utils::globalVariables(c(".", ":="))
 #'   will be deleted.
 #'
 #'   \strong{Therefore}, if the user "broke" the projects folder (e.g., by
-#'   deleting metadata; by changing the "PROJECTS_FOLDER_PATH" line in the
+#'   deleting metadata; by changing the "PROJECTSETUP_FOLDER_PATH" line in the
 #'   \emph{.Renviron} file), the user can "fix" the projects folder to some
 #'   degree by running this function with the folder's actual file path (e.g.,
 #'   restore all default templates; restore missing metadata files).
@@ -70,11 +70,11 @@ if (getRversion() >= "2.15.1") utils::globalVariables(c(".", ":="))
 #' # Any existing "projects" folder is left totally untouched,
 #' # and the user's home directory and .Renviron file are also left untouched.
 #' old_home  <- Sys.getenv("HOME")
-#' old_ppath <- Sys.getenv("PROJECTS_FOLDER_PATH")
+#' old_ppath <- Sys.getenv("PROJECTSETUP_FOLDER_PATH")
 #' temp_dir <- tempfile("dir")
 #' dir.create(temp_dir)
 #' Sys.setenv(HOME = temp_dir)
-#' Sys.unsetenv("PROJECTS_FOLDER_PATH")
+#' Sys.unsetenv("PROJECTSETUP_FOLDER_PATH")
 #' #############################################################################
 #'
 #' # Creating the projects folder
@@ -110,7 +110,7 @@ if (getRversion() >= "2.15.1") utils::globalVariables(c(".", ":="))
 #' #############################################################################
 #' # Cleanup
 #' # (or, the user can just restart R)
-#' Sys.setenv(HOME = old_home, PROJECTS_FOLDER_PATH = old_ppath)
+#' Sys.setenv(HOME = old_home, PROJECTSETUP_FOLDER_PATH = old_ppath)
 #' #############################################################################
 #' @return The project folder's path, invisibly.
 #'
@@ -140,17 +140,17 @@ setup_projects <- function(path,
     validate_directory(p_path = NULL, make_directories = make_directories) %>%
     fs::path(folder_name)
 
-  old_path <- Sys.getenv("PROJECTS_FOLDER_PATH")
+  old_path <- Sys.getenv("PROJECTSETUP_FOLDER_PATH")
 
   # If overwite = TRUE, function will run no matter what, overwriting any
-  # pre-existing value of PROJECTS_FOLDER_PATH in the home .Renviron file.
+  # pre-existing value of PROJECTSETUP_FOLDER_PATH in the home .Renviron file.
   #
   # If overwrite = FALSE, function will still run UNLESS a
-  # PROJECTS_FOLDER_PATH value already exists and does not match up with the
+  # PROJECTSETUP_FOLDER_PATH value already exists and does not match up with the
   # user-specified path.
   if (old_path != "" && old_path != path && !overwrite) {
     message(
-      "\nThe environment variable PROJECTS_FOLDER_PATH indicates",
+      "\nThe environment variable PROJECTSETUP_FOLDER_PATH indicates",
       '\nthat a "projects" folder already exists at:\n',
       old_path,
       '\n\nRerun with that path OR set overwrite = TRUE'
@@ -164,12 +164,12 @@ setup_projects <- function(path,
       user_prompt(
         msg   =
           paste0(
-            "\nThe environment variable PROJECTS_FOLDER_PATH indicates",
+            "\nThe environment variable PROJECTSETUP_FOLDER_PATH indicates",
             "\nthat a projects folder already exists at:\n",
             old_path,
             "\n\nAre you sure you want to create a new one at:\n",
             path,
-            "\n\nand put the line:\nPROJECTS_FOLDER_PATH='",
+            "\n\nand put the line:\nPROJECTSETUP_FOLDER_PATH='",
             path,
             "'\n\nin the .Renviron file at:\n",
             .Renviron_path,
@@ -185,7 +185,7 @@ setup_projects <- function(path,
     user_prompt(
       msg   =
         paste0(
-          "\nThe environment variable PROJECTS_FOLDER_PATH indicates",
+          "\nThe environment variable PROJECTSETUP_FOLDER_PATH indicates",
           "\nthat a projects folder already exists at:\n",
           old_path,
           "\n\nAre you sure you want to create a new one at:\n",
@@ -208,27 +208,27 @@ setup_projects <- function(path,
 set_Renviron <- function(projects_folder_path, .Renviron_path) {
 
   # If a home .Renviron file already exists, it is overwritten with its original
-  # contents, minus any old values of PROJECTS_FOLDER_PATH, plus the new value
-  # of PROJECTS_FOLDER_PATH.
+  # contents, minus any old values of PROJECTSETUP_FOLDER_PATH, plus the new value
+  # of PROJECTSETUP_FOLDER_PATH.
   Renviron_entries <-
     c(
       if (fs::file_exists(.Renviron_path)) {
         grep(
-          pattern = "^PROJECTS_FOLDER_PATH",
+          pattern = "^PROJECTSETUP_FOLDER_PATH",
           x       = readr::read_lines(.Renviron_path),
           value   = TRUE,
           invert  = TRUE
         )
       },
       paste0(
-        "PROJECTS_FOLDER_PATH='",
+        "PROJECTSETUP_FOLDER_PATH='",
         gsub(projects_folder_path, pattern = "'", replacement = "\\\\'"),
         "'"
       )
     )
 
   readr::write_lines(Renviron_entries, .Renviron_path)
-  Sys.setenv(PROJECTS_FOLDER_PATH = projects_folder_path)
+  Sys.setenv(PROJECTSETUP_FOLDER_PATH = projects_folder_path)
 }
 
 

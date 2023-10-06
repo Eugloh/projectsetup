@@ -391,7 +391,7 @@ Upon installation, the `projectsetup` package must be set up using
 wherein the */projects* folder is to be located.
 
 ``` r
-library(projects)
+library(projectsetup)
 ```
 
 ``` r

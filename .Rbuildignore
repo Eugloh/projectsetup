@@ -1,6 +1,6 @@
 ^CRAN-RELEASE$
 ^LICENSE\.md$
-^projects\.Rproj$
+^projectsetup\.Rproj$
 ^\.Rproj\.user$
 ^manuscript$
 ^development_code$

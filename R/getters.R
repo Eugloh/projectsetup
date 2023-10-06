@@ -7,7 +7,7 @@
 #' via \code{\link{setup_projects}()}.
 #'
 #' The file path is returned as a simple character string. It simply returns the
-#' value of \code{\link{Sys.getenv}("PROJECTS_FOLDER_PATH")}, provided
+#' value of \code{\link{Sys.getenv}("PROJECTSETUP_FOLDER_PATH")}, provided
 #' that its value is a file path of a directory that actually exists (i.e.,
 #' \code{\link{setup_projects}()} has been successfully run).
 #'
@@ -27,7 +27,7 @@ projects_folder <- function() {
 
 get_p_path <- function(error = TRUE) {
 
-  path <- Sys.getenv("PROJECTS_FOLDER_PATH")
+  path <- Sys.getenv("PROJECTSETUP_FOLDER_PATH")
 
   if (fs::dir_exists(path)) {
     path
@@ -221,10 +221,10 @@ tasks <- function(project, lead, archived = FALSE) {
 #' #############################################################################
 #' # SETUP
 #' old_home <- Sys.getenv("HOME")
-#' old_ppath <- Sys.getenv("PROJECTS_FOLDER_PATH")
+#' old_ppath <- Sys.getenv("PROJECTSETUP_FOLDER_PATH")
 #' temp_dir <- tempfile("dir")
 #' dir.create(temp_dir)
-#' Sys.unsetenv("PROJECTS_FOLDER_PATH")
+#' Sys.unsetenv("PROJECTSETUP_FOLDER_PATH")
 #' Sys.setenv(HOME = temp_dir)
 #' setup_projects(path = temp_dir)
 #' new_affiliation(department_name = "Math Dept.",
@@ -302,7 +302,7 @@ tasks <- function(project, lead, archived = FALSE) {
 #' #############################################################################
 #' # CLEANUP
 #' # (or, the user can just restart R)
-#' Sys.setenv(HOME = old_home, PROJECTS_FOLDER_PATH = old_ppath)
+#' Sys.setenv(HOME = old_home, PROJECTSETUP_FOLDER_PATH = old_ppath)
 #' @name display_metadata
 #' @importFrom rlang .data
 #' @export

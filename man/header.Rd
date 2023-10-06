@@ -41,10 +41,10 @@ The project header consists of:
 #############################################################################
 # SETUP
 old_home <- Sys.getenv("HOME")
-old_ppath <- Sys.getenv("PROJECTS_FOLDER_PATH")
+old_ppath <- Sys.getenv("PROJECTSETUP_FOLDER_PATH")
 temp_dir <- tempfile("dir")
 dir.create(temp_dir)
-Sys.unsetenv("PROJECTS_FOLDER_PATH")
+Sys.unsetenv("PROJECTSETUP_FOLDER_PATH")
 Sys.setenv(HOME = temp_dir)
 setup_projects(path = temp_dir)
 new_affiliation(department_name = "Math Dept.",
@@ -73,5 +73,5 @@ header(1)
 
 #############################################################################
 # CLEANUP
-Sys.setenv(HOME = old_home, PROJECTS_FOLDER_PATH = old_ppath)
+Sys.setenv(HOME = old_home, PROJECTSETUP_FOLDER_PATH = old_ppath)
 }

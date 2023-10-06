@@ -1,11 +1,11 @@
 test_that("Everything works", {
 
   old_home <- Sys.getenv("HOME")
-  old_ppath <- Sys.getenv("PROJECTS_FOLDER_PATH")
+  old_ppath <- Sys.getenv("PROJECTSETUP_FOLDER_PATH")
   temp_dir <- tempfile("dir")
   dir.create(temp_dir)
   Sys.setenv(HOME = temp_dir)
-  Sys.unsetenv("PROJECTS_FOLDER_PATH")
+  Sys.unsetenv("PROJECTSETUP_FOLDER_PATH")
 
   expect_equal(
     fs::path_tidy(setup_projects(temp_dir)),
@@ -14,7 +14,7 @@ test_that("Everything works", {
 
   expect_message(
     setup_projects(temp_dir, folder_name = "projects2"),
-    "\nThe environment variable PROJECTS_FOLDER_PATH indicates"
+    "\nThe environment variable PROJECTSETUP_FOLDER_PATH indicates"
   )
 
   expect_equal(
@@ -305,5 +305,5 @@ test_that("Everything works", {
     )
   )
 
-  Sys.setenv(HOME = old_home, PROJECTS_FOLDER_PATH = old_ppath)
+  Sys.setenv(HOME = old_home, PROJECTSETUP_FOLDER_PATH = old_ppath)
 })

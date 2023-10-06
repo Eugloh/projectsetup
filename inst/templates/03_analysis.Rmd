@@ -2,7 +2,7 @@
 ---
 
 ```{r setup}
-library(projects)
+library(projectsetup)
 library(here)
 library(tidyverse)
 ```

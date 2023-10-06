@@ -43,10 +43,10 @@ if (interactive()) {
   ###########################################################################
   # Setup
   old_home <- Sys.getenv("HOME")
-  old_ppath <- Sys.getenv("PROJECTS_FOLDER_PATH")
+  old_ppath <- Sys.getenv("PROJECTSETUP_FOLDER_PATH")
   temp_dir <- tempfile("dir")
   dir.create(temp_dir)
-  Sys.unsetenv("PROJECTS_FOLDER_PATH")
+  Sys.unsetenv("PROJECTSETUP_FOLDER_PATH")
   Sys.setenv(HOME = temp_dir)
   setup_projects(path = temp_dir)
   new_author("Rhonda", "Rondale", email = "ronda.rondale@co.uk")
@@ -58,7 +58,7 @@ if (interactive()) {
 
   ###########################################################################
   # Cleanup (or just restart R)
-  Sys.setenv(HOME = old_home, PROJECTS_FOLDER_PATH = old_ppath)
+  Sys.setenv(HOME = old_home, PROJECTSETUP_FOLDER_PATH = old_ppath)
 }
 }
 \seealso{

@@ -161,7 +161,7 @@ Users can now create custom names for project folders, linking the name to `shor
 # projects 0.1.1.9000
 
 ## Minor updates:
-- Updated README.md so that it properly reflects how to install the `projects` package.
+- Updated README.md so that it properly reflects how to install the `projectsetup` package.
 - Updated README.md so that it contains CRAN version and download count badges.
 
 

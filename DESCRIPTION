@@ -25,7 +25,6 @@ Imports:
     fs (>= 1.4.1),
     lubridate,
     magrittr (>= 1.5),
-    methods,
     purrr (>= 0.3.0),
     readr (>= 1.4.0),
     rlang (>= 0.4.6),
@@ -33,7 +32,8 @@ Imports:
     sessioninfo (>= 1.1.1),
     stringr (>= 1.4.0),
     vctrs (>= 0.2.4),
-    zip (>= 2.0.4)
+    zip (>= 2.0.4),
+    methods
 Suggests:
     forcats,
     here,
