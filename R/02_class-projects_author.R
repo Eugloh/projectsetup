@@ -276,7 +276,7 @@ match.projects_author <- function(x,
   base::match(x, table, nomatch, incomparables)
 }
 
-#' @include set_generics.R
+#' @include 01_set_generics.R
 #' @rdname projects_author
 #' @export
 methods::setMethod(
@@ -285,7 +285,7 @@ methods::setMethod(
   match.projects_author
 )
 
-#' @include set_generics.R
+#' @include 01_set_generics.R
 #' @rdname projects_author
 #' @export
 methods::setMethod(
@@ -294,7 +294,7 @@ methods::setMethod(
   match.projects_author
 )
 
-#' @include set_generics.R
+#' @include 01_set_generics.R
 #' @rdname projects_author
 #' @export
 methods::setMethod(
@@ -314,7 +314,7 @@ methods::setMethod(
   match(x, table, nomatch = 0L) > 0L
 }
 
-#' @include set_generics.R
+#' @include 01_set_generics.R
 #' @rdname projects_author
 #' @export
 methods::setMethod(

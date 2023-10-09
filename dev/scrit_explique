@@ -1,0 +1,15 @@
+01: definition des classes %in% et match tel que définis dans le package methods plutôt que base pour être appliqué à des classes users
+02: definition de la classe projects_author
+methods::setClass("projects_author")
+#' @rdname projects_author
+03: definition de la classe projects_stage
+vec_ptype_abbr : Vector type as a string
+vec_ptype2 : Find the common type for a pair of vectors
+vec_cast : Cast a vector to a specified type
+
+
+utilisation de vctrs new_vctr
+R/03_class-projects_stage.R:  new_vctr(x, class = "projects_stage")
+R/02_class-projects_author.R:  new_vctr(x, class = "projects_author")
+
+

@@ -1,5 +1,5 @@
 ################################################################################
-#' @include new.R
+#' @include 04_new.R
 #' @rdname new_edit_delete
 #' @export
 edit_project <- function(project,
@@ -287,7 +287,7 @@ delete_project <- function(project, archived = FALSE) {
 
 
 ################################################################################
-#' @include new.R
+#' @include 04_new.R
 #' @rdname new_edit_delete
 #' @importFrom rlang .data
 #' @export
@@ -357,7 +357,7 @@ edit_task <- function(project,
 
 
 
-#' @include new.R
+#' @include 04_new.R
 #' @rdname new_edit_delete
 #' @export
 finish <- function(project, TID, archived = FALSE) {
@@ -366,7 +366,7 @@ finish <- function(project, TID, archived = FALSE) {
 
 
 
-#' @include new.R
+#' @include 04_new.R
 #' @rdname new_edit_delete
 #' @importFrom rlang .data
 #' @export
@@ -432,7 +432,7 @@ delete_task <- function(project, TID, archived = FALSE) {
 
 
 ################################################################################
-#' @include new.R
+#' @include 04_new.R
 #' @rdname new_edit_delete
 #' @importFrom rlang .data
 #' @export
@@ -543,7 +543,7 @@ edit_author <- function(author,
 
 
 
-#' @include new.R
+#' @include 04_new.R
 #' @rdname new_edit_delete
 #' @export
 delete_author <- function(author) {
@@ -627,7 +627,7 @@ delete_author <- function(author) {
 
 
 ################################################################################
-#' @include new.R
+#' @include 04_new.R
 #' @rdname new_edit_delete
 #' @export
 edit_affiliation <- function(affiliation,
@@ -672,7 +672,7 @@ edit_affiliation <- function(affiliation,
 
 
 
-#' @include new.R
+#' @include 04_new.R
 #' @rdname new_edit_delete
 #' @export
 delete_affiliation <- function(affiliation) {

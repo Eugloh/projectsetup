@@ -73,7 +73,7 @@
 #'
 #' @examples
 #' #############################################################################
-#' # SETUP
+# SETUP
 #' old_home <- Sys.getenv("HOME")
 #' old_ppath <- Sys.getenv("PROJECTSETUP_FOLDER_PATH")
 #' temp_dir <- tempfile("dir")
@@ -82,31 +82,31 @@
 #' Sys.setenv(HOME = temp_dir)
 #' setup_projects(path = temp_dir)
 #' #############################################################################
-#'
+#' 
 #' # setting up a simple project directory tree
 #' new_project_group("kidney/clinical")
 #' new_project_group("kidney/genomics")
 #' new_project_group("prostate/clinical")
 #' new_project_group("prostate/genomics")
-#'
-#' # Wrapped in if (interactive()) because it requires interactive console input
-#' # and fails automated package checking and testing.
+#' #'
+#' #' # Wrapped in if (interactive()) because it requires interactive console input
+#' #' # and fails automated package checking and testing.
 #' if (interactive()){
 #'   new_project(title = "Sample Authorless Project", parent_directory = "kidney")
-#'
+#' 
 #'   # Moving the project folder, then moving it again.
 #'   move_project(project = 1, "kidney/genomics")
 #'   move_project(project = "Sample Authorless Project", "prostate/clinical")
-#'
+#' 
 #'   # Copying the project
 #'   copy_project(project_to_copy = 1, "kidney/clinical")
-#'
+#' 
 #'   # Renaming the folder of the copy of the project
 #'   rename_folder(project = 2, "copy")
-#'
+#' 
 #'   # Archiving the copy of the project
 #'   archive_project(2)
-#'
+#' 
 #'   # Moving and renaming the entire projects folder
 #'   temp_dir2 <- tempfile("dir")
 #'   dir.create(temp_dir2)
@@ -114,10 +114,10 @@
 #'   projects_folder()
 #'   rename_projects_folder("foobar")
 #'   projects_folder()
-#'
+#' 
 #'   # Opens the project in same session
 #'   open_project("Sample")
-#'
+#' 
 #'   # Opens the project in a new session
 #'   open_project(1, new_session = TRUE)
 #' }
