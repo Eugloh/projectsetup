@@ -1,4 +1,26 @@
 test_that("Everything works", {
+  # library(projectsetup)
+  # library(testthat)
+  # library(vctrs)
+  # load("~/projectsetup/R/sysdata.rda")
+  # for(it in c('01_set_generics.R',
+  # '02_class-projects_author.R',
+  # '03_class-projects_stage.R',
+  # '04_new.R',
+  # '05_edit.R',
+  # '06_email_authors.R',
+  # '07_file_management.R',
+  # '08_getters.R',
+  # '09_header.R',
+  # '10_metadata_manipulation.R',
+  # '11_projects.R',
+  # '12_reproducibility.R',
+  # '13_setup.R',
+  # '14_update.R',
+  # '15_utilities.R',
+  # '16_utils-pipe.R',
+  # '17_validation.R',
+  # '18_zzz.R')){ source(paste("R",it, sep="/"))}
 
   old_home <- Sys.getenv("HOME")
   old_ppath <- Sys.getenv("PROJECTSETUP_FOLDER_PATH")
@@ -17,41 +39,43 @@ test_that("Everything works", {
     "\nThe environment variable PROJECTSETUP_FOLDER_PATH indicates"
   )
 
-  # expect_equal(
-  #   sort(fs::dir_ls(projects_folder(), all = TRUE, recurse = TRUE)),
-  #   sort(
-  #     fs::path(
-  #       projects_folder(),
-  #       c(
-  #         ".metadata",
-  #         ".metadata/affiliations.rds",
-  #         ".metadata/author_affiliation_assoc.rds",
-  #         ".metadata/authors.rds",
-  #         ".metadata/project_author_assoc.rds",
-  #         ".metadata/projects.rds",
-  #         ".metadata/tasks.rds",
-  #         ".templates",
-  #         ".templates/CONSORT_protocol.Rmd",
-  #         ".templates/STROBE_protocol.Rmd",
-  #         ".templates/default_folder",
-  #         ".templates/default_folder/data",
-  #         ".templates/default_folder/data_raw",
-  #         ".templates/default_folder/figures",
-  #         ".templates/default_folder/manuscript",
-  #         ".templates/default_folder/pXXXX.Rproj",
-  #         ".templates/default_folder/progs",
-  #         ".templates/default_folder/progs/01_protocol.Rmd",
-  #         ".templates/default_folder/progs/02_datawork.Rmd",
-  #         ".templates/default_folder/progs/03_analysis.Rmd",
-  #         ".templates/default_folder/progs/04_report.Rmd",
-  #         ".templates/default_folder/progs/citations.bib",
-  #         ".templates/default_folder/progs/style.css",
-  #         ".templates/default_folder/progs/styles.docx"
-  #       )
-  #     )
-  #   ),
-  #   ignore_attr = "names"
-  # )
+  expect_equal(
+    sort(fs::dir_ls(projects_folder(), all = TRUE, recurse = TRUE)),
+    sort(
+      fs::path(
+        projects_folder(),
+        c(
+          ".metadata",
+          ".metadata/affiliations.rds",
+          ".metadata/author_affiliation_assoc.rds",
+          ".metadata/authors.rds",
+          ".metadata/project_author_assoc.rds",
+          ".metadata/projects.rds",
+          ".metadata/tasks.rds",
+          ".templates",
+          ".templates/default_folder",
+          ".templates/default_folder/01_RawData",
+          ".templates/default_folder/01_RawData/01_perFeatures",
+          ".templates/default_folder/01_RawData/02_perCells",
+          ".templates/default_folder/02_Reference",
+          ".templates/default_folder/02_Reference/01_dataCells",
+          ".templates/default_folder/02_Reference/02_dataFE",
+          ".templates/default_folder/02_Reference/03_experiment_info",
+          ".templates/default_folder/02_Reference/04_clustering",
+          ".templates/default_folder/02_Reference/05_subsampling",
+          ".templates/default_folder/02_Reference/06_upsampling",
+          ".templates/default_folder/03_Output",
+          ".templates/default_folder/progs",
+          ".templates/default_folder/progs/copy_DA.qmd",
+          ".templates/default_folder/progs/copy_DS.qmd",
+          ".templates/default_folder/progs/copy_Parent.qmd",
+          ".templates/default_folder/progs/copy_QC.qmd",
+          ".templates/default_folder/pXXXX.Rproj"
+        )
+      )
+    ),
+    ignore_attr = "names"
+  )
 
   expect_error(
     new_affiliation(
@@ -148,7 +172,7 @@ test_that("Everything works", {
     edit_project(
       "Understanding",
       short_title = "usa1",
-      authors = ~ + "303" - Stone,
+      authors = ~ +"303" - Stone,
       corresp_auth = "plato",
       impact = Inf
     ),
@@ -183,8 +207,10 @@ test_that("Everything works", {
     projects(verbose = TRUE, all_stages = TRUE),
     dplyr::tibble(
       id = 1L:2L,
-      title = c("Understanding the Construction of the United States",
-                "Boiling the Ocean"),
+      title = c(
+        "Understanding the Construction of the United States",
+        "Boiling the Ocean"
+      ),
       short_title = c("usa1", NA),
       current_owner = new_projects_author(c("13: Agnew", NA)),
       status = c("waiting on IRB", "just an idea"),
@@ -192,9 +218,13 @@ test_that("Everything works", {
       deadline = lubridate::as_datetime(c("2055-02-28", NA)),
       stage = new_projects_stage(c("4: manuscript", "0: idea")),
       impact = c(Inf, pi),
-      path = unclass(c(fs::path(projects_folder(),
-                                "famous_studied/philosophers/rocks/p0001"),
-                       fs::path(projects_folder(), "p0002"))),
+      path = unclass(c(
+        fs::path(
+          projects_folder(),
+          "famous_studied/philosophers/rocks/p0001"
+        ),
+        fs::path(projects_folder(), "p0002")
+      )),
       corresp_auth = new_projects_author(c("303: Plato", NA)),
       creator = new_projects_author(rep(paste0("0: ", Sys.info()["user"]), 2L))
     ) %>% structure(class = c("projects_metadata_tbl", class(.)))
@@ -211,30 +241,36 @@ test_that("Everything works", {
   )
 
   expect_error(
-    new_task(project = 2,
-             task = "put the horse before the cart",
-             lead = "spiro",
-             timing = NaN),
+    new_task(
+      project = 2,
+      task = "put the horse before the cart",
+      lead = "spiro",
+      timing = NaN
+    ),
     NA
   )
 
   expect_error(
-    new_task(project = 1,
-             task = "learn something",
-             effort = pi,
-             lead = "Stone",
-             status = "foobar",
-             timing = Inf),
+    new_task(
+      project = 1,
+      task = "learn something",
+      effort = pi,
+      lead = "Stone",
+      status = "foobar",
+      timing = Inf
+    ),
     NA
   )
 
   expect_error(
-    new_task(project = 1,
-             task = "take a break",
-             TID = 600.66,
-             effort = -100,
-             status = "throw it all away",
-             lead = "303"),
+    new_task(
+      project = 1,
+      task = "take a break",
+      TID = 600.66,
+      effort = -100,
+      status = "throw it all away",
+      lead = "303"
+    ),
     NA
   )
 
@@ -243,7 +279,8 @@ test_that("Everything works", {
       project = 1,
       task = "tie your shoes",
       TID = 2,
-      lead = 303),
+      lead = 303
+    ),
     NA
   )
 
@@ -252,7 +289,8 @@ test_that("Everything works", {
       project = 1,
       task = "put out the fire",
       TID = .5,
-      lead = "stone"),
+      lead = "stone"
+    ),
     NA
   )
 

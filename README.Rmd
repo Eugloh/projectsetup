@@ -17,10 +17,15 @@ Sys.setenv(HOME = tempdir())
 Sys.unsetenv("PROJECTSETUP_FOLDER_PATH")
 ```
 
-# projects
+# projectsetup (projects fork)
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/projects)](https://cran.r-project.org/package=projects)
 ![CRAN\_Download\_Counter](http://cranlogs.r-pkg.org/badges/grand-total/projects)
+
+<a href="https://github.com/ClevelandClinicQHS/projects" target="_blank">
+    <img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png" alt="GitHub Logo" title="GitHub Logo" style="width:40px; height:40px;" />
+</a> projects package initial link.
+
 
 ### Authors
 
@@ -48,7 +53,7 @@ install.packages("projectsetup")
 
 The goal of the `projectsetup` R package is to provide a set of tools that support an efficient project management workflow for statisticians and data scientists who perform reproducible research within team science environments. The `projectsetup` package is built upon some existing tools for reproducible research, particularly RStudio, the R integrated development environment in which it dwells, and R Markdown, the file structure that allows users to assemble datasets, to perform analyses and to write manuscripts in a single file. The `projectsetup` package is oriented towards efficient and reproducible academic research manuscript development and incorporates protocol and analysis templates based on widely-accepted reporting guidelines (viz., CONSORT and STROBE). When used on a shared file system (e.g., a server), the `projectsetup` package provides infrastructure for collaborative research: multiple researchers can work on the same project and keep track of its progress without having to request updates.
 
-The primary features of the projects R package are the following:
+The primary features of the projectsetup R package are the following:
 
 * Relational database containing details of projects, its granular tasks, and project coauthors and their affiliations, so that author details generally need to be entered only once;
 * Tools for editing metadata associated with projects, tasks, authors and affiliations;

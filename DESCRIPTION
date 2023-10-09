@@ -33,6 +33,7 @@ Imports:
     stringr (>= 1.4.0),
     vctrs (>= 0.2.4),
     zip (>= 2.0.4),
+    R.AnalytiCyte,
     methods
 Suggests:
     forcats,

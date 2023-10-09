@@ -127,7 +127,7 @@ setup_projects <- function(path,
                              file.path(Sys.getenv("HOME"), ".Renviron")) {
   folder_name <- folder_name %>%
     validate_single_string(na.ok = FALSE, zero.chars.ok = FALSE)
-
+  
   if (folder_name != fs::path_sanitize(folder_name)) {
     stop(
       "\nThe folder_name:\n",
@@ -135,13 +135,13 @@ setup_projects <- function(path,
       "\ncontains invalid characters for a folder name."
     )
   }
-
+  
   path <- path %>%
     validate_directory(p_path = NULL, make_directories = make_directories) %>%
     fs::path(folder_name)
-
+  
   old_path <- Sys.getenv("PROJECTSETUP_FOLDER_PATH")
-
+  
   # If overwite = TRUE, function will run no matter what, overwriting any
   # pre-existing value of PROJECTSETUP_FOLDER_PATH in the home .Renviron file.
   #
@@ -157,9 +157,9 @@ setup_projects <- function(path,
     )
     return(invisible(old_path))
   }
-
+  
   if (validate_Renviron(.Renviron_path)) {
-
+    
     if (old_path != "" && old_path != path) {
       user_prompt(
         msg   =
@@ -178,9 +178,9 @@ setup_projects <- function(path,
         n_msg = paste0("\nProjects folder remains at\n", old_path)
       )
     }
-
+    
     set_Renviron(path, .Renviron_path)
-
+    
   } else if (old_path != path && old_path != "") {
     user_prompt(
       msg   =
@@ -195,18 +195,18 @@ setup_projects <- function(path,
       n_msg = paste0("\nProjects folder remains at\n", old_path)
     )
   }
-
+  
   create_projects_folder(path)
-
+  
   setup_messages(path, old_path)
-
+  
   invisible(path)
 }
 
 
 
 set_Renviron <- function(projects_folder_path, .Renviron_path) {
-
+  
   # If a home .Renviron file already exists, it is overwritten with its original
   # contents, minus any old values of PROJECTSETUP_FOLDER_PATH, plus the new value
   # of PROJECTSETUP_FOLDER_PATH.
@@ -226,7 +226,7 @@ set_Renviron <- function(projects_folder_path, .Renviron_path) {
         "'"
       )
     )
-
+  
   readr::write_lines(Renviron_entries, .Renviron_path)
   Sys.setenv(PROJECTSETUP_FOLDER_PATH = projects_folder_path)
 }
@@ -235,15 +235,29 @@ set_Renviron <- function(projects_folder_path, .Renviron_path) {
 
 create_projects_folder <- function(projects_folder_path) {
   fs::dir_create(fs::path(projects_folder_path, ".metadata"))
+  # fs::dir_create(
+  #   fs::path(
+  #     projects_folder_path,
+  #     ".templates/default_folder",
+  #     c("data", "data_raw", "progs", "figures", "manuscript")
+  #   )
+  # )
+  
   fs::dir_create(
     fs::path(
       projects_folder_path,
       ".templates/default_folder",
-      c("data", "data_raw", "progs", "figures", "manuscript")
+      c(#"01_RawData", 
+        "01_RawData/01_perFeatures", "01_RawData/02_perCells", 
+        #"02_Reference", 
+        "02_Reference/01_dataCells","02_Reference/02_dataFE","02_Reference/03_experiment_info",
+        "02_Reference/04_clustering","02_Reference/05_subsampling","02_Reference/06_upsampling",
+        "03_Output"  ,"progs")
     )
   )
-   restore_templates(projects_folder_path)
-   restore_metadata(projects_folder_path)
+  
+  restore_templates_2(projects_folder_path)
+  restore_metadata(projects_folder_path)
 }
 
 
@@ -293,12 +307,12 @@ restore_templates <- function(projects_folder_path) {
       ),
     .f =
       function(template_name, template_source, subfolder) {
-
+        
         template_path <-
           fs::path(projects_folder_path, ".templates", subfolder, template_name)
-
+        
         if (!fs::file_exists(template_path)) {
-
+          
           template_source <-
             system.file(
               "templates",
@@ -306,19 +320,21 @@ restore_templates <- function(projects_folder_path) {
               package = "projectsetup",
               mustWork = TRUE
             )
-
+          
           fs::file_copy(template_source, template_path)
         }
       }
   )
 }
 
+#' @import R.AnalytiCyte
 restore_templates_2 <- function(projects_folder_path) {
   purrr::pwalk(
     .l =
       list(
         template_name =
           c(
+            "pXXXX.Rproj",
             "copy_Parent.qmd" ,
             "copy_QC.qmd" ,
             "copy_DA.qmd" ,
@@ -326,13 +342,16 @@ restore_templates_2 <- function(projects_folder_path) {
           ),
         template_source =
           c(
+            "pXXXX.Rproj",
             "copy_Parent.qmd" ,
             "copy_QC.qmd" ,
             "copy_DA.qmd" ,
             "copy_DS.qmd"  
           ),
         subfolder =
-          c("default_folder/progs",
+          c(
+            "default_folder",
+            "default_folder/progs",
             "default_folder/progs",
             "default_folder/progs",
             "default_folder/progs"
@@ -353,6 +372,16 @@ restore_templates_2 <- function(projects_folder_path) {
               package = "R.AnalytiCyte",
               mustWork = TRUE
             )
+          
+          
+          # template_source <-
+          #   system.file(
+          #     "report",
+          #     template_source,
+          #     package = "projectsetup",
+          #     mustWork = TRUE
+          #   )
+          
           
           fs::file_copy(template_source, template_path)
         }

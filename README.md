@@ -1,10 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# projectsetup
+# projectsetup (projects fork)
 
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/projects)](https://cran.r-project.org/package=projects)
-![CRAN\_Download\_Counter](http://cranlogs.r-pkg.org/badges/grand-total/projects)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/projects)](https://cran.r-project.org/package=projects)
+![CRAN_Download_Counter](http://cranlogs.r-pkg.org/badges/grand-total/projects)
+
+<a href="https://github.com/ClevelandClinicQHS/projects" target="_blank">
+<img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png" alt="GitHub Logo" title="GitHub Logo" style="width:40px; height:40px;" />
+</a> projects package initial link.
 
 ### Authors
 
@@ -45,39 +49,39 @@ install.packages("projectsetup")
 
 ## Introduction
 
-The goal of the `projectsetup` R package is to provide a set of tools that
-support an efficient project management workflow for statisticians and
-data scientists who perform reproducible research within team science
-environments. The `projectsetup` package is built upon some existing tools
-for reproducible research, particularly RStudio, the R integrated
-development environment in which it dwells, and R Markdown, the file
-structure that allows users to assemble datasets, to perform analyses
-and to write manuscripts in a single file. The `projectsetup` package is
-oriented towards efficient and reproducible academic research manuscript
-development and incorporates protocol and analysis templates based on
-widely-accepted reporting guidelines (viz., CONSORT and STROBE). When
-used on a shared file system (e.g., a server), the `projectsetup` package
-provides infrastructure for collaborative research: multiple researchers
-can work on the same project and keep track of its progress without
-having to request updates.
+The goal of the `projectsetup` R package is to provide a set of tools
+that support an efficient project management workflow for statisticians
+and data scientists who perform reproducible research within team
+science environments. The `projectsetup` package is built upon some
+existing tools for reproducible research, particularly RStudio, the R
+integrated development environment in which it dwells, and R Markdown,
+the file structure that allows users to assemble datasets, to perform
+analyses and to write manuscripts in a single file. The `projectsetup`
+package is oriented towards efficient and reproducible academic research
+manuscript development and incorporates protocol and analysis templates
+based on widely-accepted reporting guidelines (viz., CONSORT and
+STROBE). When used on a shared file system (e.g., a server), the
+`projectsetup` package provides infrastructure for collaborative
+research: multiple researchers can work on the same project and keep
+track of its progress without having to request updates.
 
-The primary features of the projects R package are the following:
+The primary features of the projectsetup R package are the following:
 
-  - Relational database containing details of projects, its granular
-    tasks, and project coauthors and their affiliations, so that author
-    details generally need to be entered only once;
-  - Tools for editing metadata associated with projects, tasks, authors
-    and affiliations;
-  - Automated file structure supporting reproducible research workflow;
-  - Report templates that automatically generate title page headers,
-    including a numbered author list and corresponding affiliations;
-  - Full RStudio integration via R Markdown, including customizable
-    styling via cascading style sheets (CSS);
-  - Customization, including the ability to add and to edit templates
-    for protocols and reports, and the ability to change default project
-    directory and file structures; and
-  - Organization and management functionality, including the ability to
-    group, archive and delete projects.
+- Relational database containing details of projects, its granular
+  tasks, and project coauthors and their affiliations, so that author
+  details generally need to be entered only once;
+- Tools for editing metadata associated with projects, tasks, authors
+  and affiliations;
+- Automated file structure supporting reproducible research workflow;
+- Report templates that automatically generate title page headers,
+  including a numbered author list and corresponding affiliations;
+- Full RStudio integration via R Markdown, including customizable
+  styling via cascading style sheets (CSS);
+- Customization, including the ability to add and to edit templates for
+  protocols and reports, and the ability to change default project
+  directory and file structures; and
+- Organization and management functionality, including the ability to
+  group, archive and delete projects.
 
 At its outset, the `projectsetup` package creates a folder called
 */projects* in a user-specified location. This directory will contain
@@ -178,13 +182,13 @@ alterations.
 
 ### Initial Setup
 
-All projects that the user creates with the `projectsetup` package—as well
-as its infrastructure—reside in a main folder called */projects*. Users
-need not manually create this directory, and in fact they are encouraged
-not to manually manipulate any folders that the `projectsetup` package
-involves. Instead, users run the function `setup_projects()`, providing
-the full file path of the directory in which the user wants the
-*/projects* folder to reside.
+All projects that the user creates with the `projectsetup` package—as
+well as its infrastructure—reside in a main folder called */projects*.
+Users need not manually create this directory, and in fact they are
+encouraged not to manually manipulate any folders that the
+`projectsetup` package involves. Instead, users run the function
+`setup_projects()`, providing the full file path of the directory in
+which the user wants the */projects* folder to reside.
 
 ### Metadata
 
@@ -205,123 +209,119 @@ affiliations (see the **Internal Tables** section).
 
 #### Projects Table Columns
 
-  - `id` – an identification number, specifically an integer, unique
-    among the other projects. This number can be used whenever needing
-    to identify this project within `projectsetup` package functions.
-  - `title` – the title of the project. A nonambiguous substring of
-    `title` (i.e., a substring that does not match any other project)
-    can be used whenever needing to identify this project within
-    `projectsetup` package functions.
-  - `short_title` – an optional unique nickname for the project. A
-    nonambiguous substring of `short_title` (i.e., a substring that does
-    not match any other project) can be used whenever needing to
-    identify this project within `projectsetup` package functions. This is
-    useful if users cannot remember the long, formal project `title` nor
-    the project `id`.
-  - `current_owner` – the `id` of the author who is responsible for
-    taking action in order that work on the project may proceed further.
-  - `status` – a short description of the status of the project. For
-    example, it may elaborate on the value of `current_owner` and/or
-    `stage`.
-  - `impact` — a number depicting the estimated impact that this project
-    will have.
-  - `deadline_type` – a simple description of the meaning of the date
-    contained in the next field, `deadline`.
-  - `deadline` – a date indicating some kind of deadline whose meaning
-    is described in the previous field, `deadline_type`.
-  - `stage` – one of seven predefined stages of project development that
-    the project is currently in:
-      - `c("0: idea",`
-      -     `"1: design",`
-      -     `"2: data collection",`
-      -     `"3: analysis",`
-      -     `"4: manuscript",`
-      -     `"5: under review",`
-      -     `"6: accepted")`
-  - `path` – the full file path where the project folder is located.
-  - `corresp_auth` – the `id` of the author who should be contacted for
-    any correspondence relating to the project. This author’s name will
-    be especially marked on automatically generated title pages for this
-    project, and his or her contact information will be especially
-    displayed there as well in a “Corresponding Author” section.
-  - `creator` – the `id` of the author who initially created the
-    project, or the value of `Sys.info()["user"]` if the author who ran
-    `new_project()` did not enter a value.
+- `id` – an identification number, specifically an integer, unique among
+  the other projects. This number can be used whenever needing to
+  identify this project within `projectsetup` package functions.
+- `title` – the title of the project. A nonambiguous substring of
+  `title` (i.e., a substring that does not match any other project) can
+  be used whenever needing to identify this project within
+  `projectsetup` package functions.
+- `short_title` – an optional unique nickname for the project. A
+  nonambiguous substring of `short_title` (i.e., a substring that does
+  not match any other project) can be used whenever needing to identify
+  this project within `projectsetup` package functions. This is useful
+  if users cannot remember the long, formal project `title` nor the
+  project `id`.
+- `current_owner` – the `id` of the author who is responsible for taking
+  action in order that work on the project may proceed further.
+- `status` – a short description of the status of the project. For
+  example, it may elaborate on the value of `current_owner` and/or
+  `stage`.
+- `impact` — a number depicting the estimated impact that this project
+  will have.
+- `deadline_type` – a simple description of the meaning of the date
+  contained in the next field, `deadline`.
+- `deadline` – a date indicating some kind of deadline whose meaning is
+  described in the previous field, `deadline_type`.
+- `stage` – one of seven predefined stages of project development that
+  the project is currently in:
+  - `c("0: idea",`
+  -     `"1: design",`
+  -     `"2: data collection",`
+  -     `"3: analysis",`
+  -     `"4: manuscript",`
+  -     `"5: under review",`
+  -     `"6: accepted")`
+- `path` – the full file path where the project folder is located.
+- `corresp_auth` – the `id` of the author who should be contacted for
+  any correspondence relating to the project. This author’s name will be
+  especially marked on automatically generated title pages for this
+  project, and his or her contact information will be especially
+  displayed there as well in a “Corresponding Author” section.
+- `creator` – the `id` of the author who initially created the project,
+  or the value of `Sys.info()["user"]` if the author who ran
+  `new_project()` did not enter a value.
 
 #### Authors Table
 
-  - `id` – an identification number, specifically an integer, unique
-    among the other authors. This number can be used whenever needing to
-    identify this author within `projectsetup` package functions.
-  - `given_names` – the given name or names of the author. A
-    nonambiguous substring of `given_names` (i.e., a substring that does
-    not match any other author) can be used whenever needing to identify
-    this author within `projectsetup` package functions. This is included in
-    the automatically generated title pages of the projects associated
-    with this author.
-  - `last_name` – the last name or names of the author. A nonambiguous
-    substring of `last_name` (i.e., a substring that does not match any
-    other author) can be used whenever needing to identify this author
-    within `projectsetup` package functions. This is included after
-    `given_names` in the automatically generated title pages of the
-    projects associated with this author.
-  - `title` – the job title of the author.
-  - `degree` – the abbreviation(s) of the author’s academic degree(s).
-    This is included after `last_name` in the automatically generated
-    title pages of the projects associated with this author.
-  - `email` – the email address of the author. This is included in the
-    “Corresponding Author” section of the automatically generated
-    title pages of projects whose `corresp_auth` field contains this
-    author.
-  - `phone` – the phone number of the author. This is included in the
-    “Corresponding Author” section of the automatically generated
-    title pages of projects whose `corresp_auth` field contains this
-    author.
+- `id` – an identification number, specifically an integer, unique among
+  the other authors. This number can be used whenever needing to
+  identify this author within `projectsetup` package functions.
+- `given_names` – the given name or names of the author. A nonambiguous
+  substring of `given_names` (i.e., a substring that does not match any
+  other author) can be used whenever needing to identify this author
+  within `projectsetup` package functions. This is included in the
+  automatically generated title pages of the projects associated with
+  this author.
+- `last_name` – the last name or names of the author. A nonambiguous
+  substring of `last_name` (i.e., a substring that does not match any
+  other author) can be used whenever needing to identify this author
+  within `projectsetup` package functions. This is included after
+  `given_names` in the automatically generated title pages of the
+  projects associated with this author.
+- `title` – the job title of the author.
+- `degree` – the abbreviation(s) of the author’s academic degree(s).
+  This is included after `last_name` in the automatically generated
+  title pages of the projects associated with this author.
+- `email` – the email address of the author. This is included in the
+  “Corresponding Author” section of the automatically generated title
+  pages of projects whose `corresp_auth` field contains this author.
+- `phone` – the phone number of the author. This is included in the
+  “Corresponding Author” section of the automatically generated title
+  pages of projects whose `corresp_auth` field contains this author.
 
 #### Affiliations Table
 
-  - `id` – an identification number, specifically an integer, unique
-    among the other affiliations. This number can be used whenever
-    needing to identify this affiliation within `projectsetup` package
-    functions.
-  - `department_name` – the department name of the affiliation. A
-    nonambiguous substring of `department_name` (i.e., a substring that
-    does not match any other affiliation) can be used whenever needing
-    to identify this affiliation within `projectsetup` package functions.
-    This is included in the affiliations section of the automatically
-    generated title page of projects associated with authors with this
-    affiliation.
-  - `institution_name` – the name of the overall institution of the
-    affiliation. A nonambiguous substring of `institution_name` (i.e., a
-    substring that does not match any other affiliation) can be used
-    whenever needing to identify this affiliation within `projectsetup`
-    package functions. This is included after `department_name` in the
-    affiliations section of the automatically generated title page of
-    projects associated with authors with this affiliation.
-  - `address` – the address of the affiliation. This is included after
-    `institution_name` in the affiliations section of the automatically
-    generated title page of projects associated with authors with this
-    affiliation. It is also included in the “Corresponding Author”
-    section of the title page when a project’s corresponding author has
-    this affiliation as his or her primary (i.e., first) affiliation
-    (see the **Internal Tables** section).
+- `id` – an identification number, specifically an integer, unique among
+  the other affiliations. This number can be used whenever needing to
+  identify this affiliation within `projectsetup` package functions.
+- `department_name` – the department name of the affiliation. A
+  nonambiguous substring of `department_name` (i.e., a substring that
+  does not match any other affiliation) can be used whenever needing to
+  identify this affiliation within `projectsetup` package functions.
+  This is included in the affiliations section of the automatically
+  generated title page of projects associated with authors with this
+  affiliation.
+- `institution_name` – the name of the overall institution of the
+  affiliation. A nonambiguous substring of `institution_name` (i.e., a
+  substring that does not match any other affiliation) can be used
+  whenever needing to identify this affiliation within `projectsetup`
+  package functions. This is included after `department_name` in the
+  affiliations section of the automatically generated title page of
+  projects associated with authors with this affiliation.
+- `address` – the address of the affiliation. This is included after
+  `institution_name` in the affiliations section of the automatically
+  generated title page of projects associated with authors with this
+  affiliation. It is also included in the “Corresponding Author” section
+  of the title page when a project’s corresponding author has this
+  affiliation as his or her primary (i.e., first) affiliation (see the
+  **Internal Tables** section).
 
 #### Tasks Table
 
-  - `PID` — the `id` of the project that the task is associated with
-    (see above).
-  - `TID` — the identification number of the task, also representing the
-    order of priority within its associated project. For each project,
-    its tasks’ `TID`s are always sequential positive integers starting
-    with 1
-  - `done` — a binary (1/0) indicator of the task’s completion status.
-  - `effort` — a numeric value indicating the level of effort that it
-    will require to complete the task
-  - `timing` — a numeric value indicating the nature of the timing
-    associated with the completion of the task
-  - `lead` — the `id` of the author who will take the lead in completing
-    the task.
-  - `status` — the status of the task.
+- `PID` — the `id` of the project that the task is associated with (see
+  above).
+- `TID` — the identification number of the task, also representing the
+  order of priority within its associated project. For each project, its
+  tasks’ `TID`s are always sequential positive integers starting with 1
+- `done` — a binary (1/0) indicator of the task’s completion status.
+- `effort` — a numeric value indicating the level of effort that it will
+  require to complete the task
+- `timing` — a numeric value indicating the nature of the timing
+  associated with the completion of the task
+- `lead` — the `id` of the author who will take the lead in completing
+  the task.
+- `status` — the status of the task.
 
 #### Internal Tables
 
@@ -345,34 +345,34 @@ the *.templates* directory in the main */projects* folder.
 
 The default project folder template is structured as follows:
 
-  - */p*XXXX
-      - */data*
-      - */data\_raw*
-      - */figures*
-      - */manuscript*
-      - */progs*
-          - *01\_protocol.Rmd*
-          - *02\_datawork.Rmd*
-          - *03\_analysis.Rmd*
-          - *04\_report.Rmd*
-          - *style.css*
-          - *styles.docx*
-          - *citations.bib*
-      - *p*XXXX.*Rproj*
+- */p*XXXX
+  - */data*
+  - */data_raw*
+  - */figures*
+  - */manuscript*
+  - */progs*
+    - *01_protocol.Rmd*
+    - *02_datawork.Rmd*
+    - *03_analysis.Rmd*
+    - *04_report.Rmd*
+    - *style.css*
+    - *styles.docx*
+    - *citations.bib*
+  - *p*XXXX.*Rproj*
 
 The included subfolders serve to organize the project, while the *.Rmd*
 files are templates that facilitate the user’s workflow. The *style.css*
 and *styles.docx* files are a cascading style sheets (CSS) file and a
 Word style template, which allow for custom styling of knitted HTML
 files and Word documents, respectively. The *citations.bib* file is an
-empty BibTeX file. The default *01\_protocol.Rmd* and *04\_report.Rmd*
+empty BibTeX file. The default *01_protocol.Rmd* and *04_report.Rmd*
 files already reference the *.bib* and style files, easing the
 implementation of these features for the user.
 
 ### File Management
 
-The goal of the `projectsetup` package is to provide a comprehensive set of
-tools managing project files in a way that is self-contained in R and
+The goal of the `projectsetup` package is to provide a comprehensive set
+of tools managing project files in a way that is self-contained in R and
 independent of the underlying operating system. On a daily basis,
 researchers make, move, copy, delete and archive files. Through the
 `projectsetup` package, researchers can perform all these actions in an
@@ -397,7 +397,7 @@ library(projectsetup)
 ``` r
 setup_projects("~")
 #> projects folder created at
-#> /tmp/RtmpjCNxOS/projects
+#> /tmp/RtmpcgVIC0/projects
 #> 
 #> Add affiliations with new_affiliation(),
 #> then add authors with new_author(),
@@ -415,10 +415,10 @@ new_affiliation(
   address = "314 Newton Blvd, Springfield CT 06003"
 )
 #> New affiliation:
-#> # A tibble: 1 x 4
-#>      id department_name      institution_name        address                    
-#>   <int> <chr>                <chr>                   <chr>                      
-#> 1     1 Department of Physi… University of North Sc… 314 Newton Blvd, Springfie…
+#> # A tibble: 1 × 4
+#>      id department_name       institution_name            address               
+#>   <int> <chr>                 <chr>                       <chr>                 
+#> 1     1 Department of Physics University of North Science 314 Newton Blvd, Spri…
 ```
 
 This affiliation has been successfully added to the “affiliations” table
@@ -432,10 +432,10 @@ new_affiliation(
   address = "Let Gade 27182, 1566 Copenhagen, Denmark"
 )
 #> New affiliation:
-#> # A tibble: 1 x 4
-#>      id department_name         institution_name         address                
-#>   <int> <chr>                   <chr>                    <chr>                  
-#> 1     2 Impossibles Investigat… Creekshirebrook Academy… Let Gade 27182, 1566 C…
+#> # A tibble: 1 × 4
+#>      id department_name                institution_name                  address
+#>   <int> <chr>                          <chr>                             <chr>  
+#> 1     2 Impossibles Investigation Team Creekshirebrook Academy of Thinks Let Ga…
 
 new_affiliation(
   department_name  = "Statistical Consulting Unit",
@@ -444,17 +444,17 @@ new_affiliation(
   id = 50
 )
 #> New affiliation:
-#> # A tibble: 1 x 4
-#>      id department_name         institution_name           address              
-#>   <int> <chr>                   <chr>                      <chr>                
-#> 1    50 Statistical Consulting… Creekshirebrook Academy o… "196 Normal Ave, Col…
+#> # A tibble: 1 × 4
+#>      id department_name             institution_name                  address   
+#>   <int> <chr>                       <chr>                             <chr>     
+#> 1    50 Statistical Consulting Unit Creekshirebrook Academy of Thinks "196 Norm…
 ```
 
 Note that we chose a specific `id` number (50) for the affiliation
 called the “Impossibles Investigation Team.”
 
-Now we are ready to add authors to the “authors” table of the `projectsetup`
-database.
+Now we are ready to add authors to the “authors” table of the
+`projectsetup` database.
 
 ``` r
 new_author(
@@ -467,17 +467,17 @@ new_author(
   phone = "965-555-5556"
 )
 #> New author:
-#> # A tibble: 1 x 7
-#>      id last_name given_names title     degree email                 phone      
-#>   <int> <chr>     <chr>       <chr>     <chr>  <chr>                 <chr>      
-#> 1     1 Bug       Scott       Professor PhD    scottbug@impossible.… 965-555-55…
+#> # A tibble: 1 × 7
+#>      id last_name given_names title     degree email                   phone    
+#>   <int> <chr>     <chr>       <chr>     <chr>  <chr>                   <chr>    
+#> 1     1 Bug       Scott       Professor PhD    scottbug@impossible.net 965-555-…
 #> 
 #> New author's affiliations:
-#> # A tibble: 2 x 4
-#>   affiliation_id department_name       institution_name       address           
-#>            <int> <chr>                 <chr>                  <chr>             
-#> 1              2 Impossibles Investig… Creekshirebrook Acade… Let Gade 27182, 1…
-#> 2              1 Department of Physics University of North S… 314 Newton Blvd, …
+#> # A tibble: 2 × 4
+#>   affiliation_id department_name                institution_name         address
+#>            <int> <chr>                          <chr>                    <chr>  
+#> 1              2 Impossibles Investigation Team Creekshirebrook Academy… Let Ga…
+#> 2              1 Department of Physics          University of North Sci… 314 Ne…
 ```
 
 Notice that in creating associations between Scott Bug and his
@@ -497,16 +497,16 @@ new_author(
   id = 86
 )
 #> New author:
-#> # A tibble: 1 x 7
+#> # A tibble: 1 × 7
 #>      id last_name given_names title   degree email phone       
 #>   <int> <chr>     <chr>       <chr>   <chr>  <chr> <chr>       
 #> 1    86 Curie     Marie       Chemist <NA>   <NA>  553-867-5309
 #> 
 #> New author's affiliations:
-#> # A tibble: 1 x 4
-#>   affiliation_id department_name       institution_name        address          
-#>            <int> <chr>                 <chr>                   <chr>            
-#> 1             50 Statistical Consulti… Creekshirebrook Academ… "196 Normal Ave,…
+#> # A tibble: 1 × 4
+#>   affiliation_id department_name             institution_name            address
+#>            <int> <chr>                       <chr>                       <chr>  
+#> 1             50 Statistical Consulting Unit Creekshirebrook Academy of… "196 N…
 
 new_author(
   given_names = "George Washington",
@@ -517,22 +517,22 @@ new_author(
   id = 1337
 )
 #> New author:
-#> # A tibble: 1 x 7
+#> # A tibble: 1 × 7
 #>      id last_name given_names       title          degree         email phone
 #>   <int> <chr>     <chr>             <chr>          <chr>          <chr> <chr>
 #> 1  1337 Carver    George Washington Astrophysicist MA, MPhil, PhD <NA>  <NA>
 #> 
 #> New author's affiliations:
-#> # A tibble: 3 x 4
-#>   affiliation_id department_name       institution_name      address            
-#>            <int> <chr>                 <chr>                 <chr>              
-#> 1              1 Department of Physics University of North … "314 Newton Blvd, …
-#> 2              2 Impossibles Investig… Creekshirebrook Acad… "Let Gade 27182, 1…
-#> 3             50 Statistical Consulti… Creekshirebrook Acad… "196 Normal Ave, C…
+#> # A tibble: 3 × 4
+#>   affiliation_id department_name                institution_name         address
+#>            <int> <chr>                          <chr>                    <chr>  
+#> 1              1 Department of Physics          University of North Sci… "314 N…
+#> 2              2 Impossibles Investigation Team Creekshirebrook Academy… "Let G…
+#> 3             50 Statistical Consulting Unit    Creekshirebrook Academy… "196 N…
 
 new_author(last_name = "Archimedes", title = "Mathematician")
 #> New author:
-#> # A tibble: 1 x 7
+#> # A tibble: 1 × 7
 #>      id last_name  given_names title         degree email phone
 #>   <int> <chr>      <chr>       <chr>         <chr>  <chr> <chr>
 #> 1     2 Archimedes <NA>        Mathematician <NA>   <NA>  <NA>
@@ -549,17 +549,17 @@ new_author(
   email = "wu@WU.wU"
 )
 #> New author:
-#> # A tibble: 1 x 7
+#> # A tibble: 1 × 7
 #>      id last_name given_names  title     degree email    phone
 #>   <int> <chr>     <chr>        <chr>     <chr>  <chr>    <chr>
 #> 1     3 Wu        Chien-Shiung Physicist PhD    wu@wu.wu <NA>
 #> 
 #> New author's affiliations:
-#> # A tibble: 2 x 4
-#>   affiliation_id department_name      institution_name       address            
-#>            <int> <chr>                <chr>                  <chr>              
-#> 1              1 Department of Physi… University of North S… "314 Newton Blvd, …
-#> 2             50 Statistical Consult… Creekshirebrook Acade… "196 Normal Ave, C…
+#> # A tibble: 2 × 4
+#>   affiliation_id department_name             institution_name            address
+#>            <int> <chr>                       <chr>                       <chr>  
+#> 1              1 Department of Physics       University of North Science "314 N…
+#> 2             50 Statistical Consulting Unit Creekshirebrook Academy of… "196 N…
 ```
 
 Now that some authors and affiliations have been created, we can view
@@ -567,21 +567,21 @@ these tables:
 
 ``` r
 authors()
-#> # A tibble: 5 x 7
-#>      id last_name  given_names     title      degree     email          phone   
-#>   <int> <chr>      <chr>           <chr>      <chr>      <chr>          <chr>   
-#> 1     1 Bug        Scott           Professor  PhD        scottbug@impo… 965-555…
-#> 2     2 Archimedes <NA>            Mathemati… <NA>       <NA>           <NA>    
-#> 3     3 Wu         Chien-Shiung    Physicist  PhD        wu@wu.wu       <NA>    
-#> 4    86 Curie      Marie           Chemist    <NA>       <NA>           553-867…
-#> 5  1337 Carver     George Washing… Astrophys… MA, MPhil… <NA>           <NA>
+#> # A tibble: 5 × 7
+#>      id last_name  given_names       title          degree         email   phone
+#>   <int> <chr>      <chr>             <chr>          <chr>          <chr>   <chr>
+#> 1     1 Bug        Scott             Professor      PhD            scottb… 965-…
+#> 2     2 Archimedes <NA>              Mathematician  <NA>           <NA>    <NA> 
+#> 3     3 Wu         Chien-Shiung      Physicist      PhD            wu@wu.… <NA> 
+#> 4    86 Curie      Marie             Chemist        <NA>           <NA>    553-…
+#> 5  1337 Carver     George Washington Astrophysicist MA, MPhil, PhD <NA>    <NA>
 affiliations()
-#> # A tibble: 3 x 4
-#>      id department_name         institution_name         address                
-#>   <int> <chr>                   <chr>                    <chr>                  
-#> 1     1 Department of Physics   University of North Sci… "314 Newton Blvd, Spri…
-#> 2     2 Impossibles Investigat… Creekshirebrook Academy… "Let Gade 27182, 1566 …
-#> 3    50 Statistical Consulting… Creekshirebrook Academy… "196 Normal Ave, Colum…
+#> # A tibble: 3 × 4
+#>      id department_name                institution_name                  address
+#>   <int> <chr>                          <chr>                             <chr>  
+#> 1     1 Department of Physics          University of North Science       "314 N…
+#> 2     2 Impossibles Investigation Team Creekshirebrook Academy of Thinks "Let G…
+#> 3    50 Statistical Consulting Unit    Creekshirebrook Academy of Thinks "196 N…
 ```
 
 Now we will showcase project creation:
@@ -599,24 +599,24 @@ new_project(
 )
 #> 
 #> Project 1 has been created at
-#> /tmp/RtmpjCNxOS/projects/p0001
-#> # A tibble: 1 x 6
-#>      id title             stage     status     deadline_type deadline           
-#>   <int> <chr>             <prjstg>  <chr>      <chr>         <dttm>             
-#> 1     1 Achieving Cold F… 1: design just crea… Pilot study   2020-12-31 00:00:00
+#> /tmp/RtmpcgVIC0/projects/p0001
+#> # A tibble: 1 × 6
+#>      id title                 stage     status deadline_type deadline           
+#>   <int> <chr>                 <prjstg>  <chr>  <chr>         <dttm>             
+#> 1     1 Achieving Cold Fusion 1: design just … Pilot study   2020-12-31 00:00:00
 #> 
 #> New project's authors:
-#> # A tibble: 4 x 7
-#>   author_id last_name given_names    title      degree    email         phone   
-#>       <int> <chr>     <chr>          <chr>      <chr>     <chr>         <chr>   
-#> 1         1 Bug       Scott          Professor  PhD       scottbug@imp… 965-555…
-#> 2         3 Wu        Chien-Shiung   Physicist  PhD       wu@wu.wu      <NA>    
-#> 3        86 Curie     Marie          Chemist    <NA>      <NA>          553-867…
-#> 4      1337 Carver    George Washin… Astrophys… MA, MPhi… <NA>          <NA>    
-#> # A tibble: 1 x 3
+#> # A tibble: 4 × 7
+#>   author_id last_name given_names       title          degree        email phone
+#>       <int> <chr>     <chr>             <chr>          <chr>         <chr> <chr>
+#> 1         1 Bug       Scott             Professor      PhD           scot… 965-…
+#> 2         3 Wu        Chien-Shiung      Physicist      PhD           wu@w… <NA> 
+#> 3        86 Curie     Marie             Chemist        <NA>          <NA>  553-…
+#> 4      1337 Carver    George Washington Astrophysicist MA, MPhil, P… <NA>  <NA> 
+#> # A tibble: 1 × 3
 #>   current_owner corresp_auth creator   
 #>   <prjaut>      <prjaut>     <prjaut>  
-#> 1 1337: Carver  1: Bug       0: kriegen
+#> 1 1337: Carver  1: Bug       0: lohmann
 ```
 
 Notice that since a `creator` was not specified, this field was
@@ -640,21 +640,21 @@ new_project(
 )
 #> 
 #> Project 2 has been created at
-#> /tmp/RtmpjCNxOS/projects/p0002
-#> # A tibble: 1 x 6
-#>      id title          stage         status    deadline_type deadline           
-#>   <int> <chr>          <prjstg>      <chr>     <chr>         <dttm>             
-#> 1     2 Weighing the … 4: manuscript just cre… <NA>          NA
+#> /tmp/RtmpcgVIC0/projects/p0002
+#> # A tibble: 1 × 6
+#>      id title             stage         status deadline_type deadline
+#>   <int> <chr>             <prjstg>      <chr>  <chr>         <dttm>  
+#> 1     2 Weighing the Cro… 4: manuscript just … <NA>          NA
 #> 
 #> New project's authors:
-#> # A tibble: 1 x 7
+#> # A tibble: 1 × 7
 #>   author_id last_name  given_names title         degree email phone
 #>       <int> <chr>      <chr>       <chr>         <chr>  <chr> <chr>
 #> 1         2 Archimedes <NA>        Mathematician <NA>   <NA>  <NA> 
-#> # A tibble: 1 x 3
+#> # A tibble: 1 × 3
 #>   current_owner corresp_auth  creator   
 #>   <prjaut>      <prjaut>      <prjaut>  
-#> 1 2: Archimedes 2: Archimedes 0: kriegen
+#> 1 2: Archimedes 2: Archimedes 0: lohmann
 
 new_project(
   title = "How I Learned to Stop Worrying and Love the Bomb",
@@ -673,20 +673,20 @@ new_project(
 )
 #> 
 #> Project 1945 has been created at
-#> /tmp/RtmpjCNxOS/projects/top_secret/p1945
-#> # A tibble: 1 x 6
-#>      id title        stage           status    deadline_type deadline           
-#>   <int> <chr>        <prjstg>        <chr>     <chr>         <dttm>             
-#> 1  1945 How I Learn… 5: under review debating… 2nd revision  2030-10-08 00:00:00
+#> /tmp/RtmpcgVIC0/projects/top_secret/p1945
+#> # A tibble: 1 × 6
+#>      id title           stage           status deadline_type deadline           
+#>   <int> <chr>           <prjstg>        <chr>  <chr>         <dttm>             
+#> 1  1945 How I Learned … 5: under review debat… 2nd revision  2030-10-08 00:00:00
 #> 
 #> New project's authors:
-#> # A tibble: 3 x 7
-#>   author_id last_name given_names    title      degree    email         phone   
-#>       <int> <chr>     <chr>          <chr>      <chr>     <chr>         <chr>   
-#> 1         3 Wu        Chien-Shiung   Physicist  PhD       wu@wu.wu      <NA>    
-#> 2         1 Bug       Scott          Professor  PhD       scottbug@imp… 965-555…
-#> 3      1337 Carver    George Washin… Astrophys… MA, MPhi… <NA>          <NA>    
-#> # A tibble: 1 x 3
+#> # A tibble: 3 × 7
+#>   author_id last_name given_names       title          degree        email phone
+#>       <int> <chr>     <chr>             <chr>          <chr>         <chr> <chr>
+#> 1         3 Wu        Chien-Shiung      Physicist      PhD           wu@w… <NA> 
+#> 2         1 Bug       Scott             Professor      PhD           scot… 965-…
+#> 3      1337 Carver    George Washington Astrophysicist MA, MPhil, P… <NA>  <NA> 
+#> # A tibble: 1 × 3
 #>   current_owner corresp_auth creator 
 #>   <prjaut>      <prjaut>     <prjaut>
 #> 1 1337: Carver  1337: Carver 3: Wu
@@ -702,18 +702,18 @@ new_project(
 )
 #> 
 #> Project 3 has been created at
-#> /tmp/RtmpjCNxOS/projects/p0003
-#> # A tibble: 1 x 6
-#>      id title         stage       status       deadline_type deadline           
-#>   <int> <chr>         <prjstg>    <chr>        <chr>         <dttm>             
-#> 1     3 Understandin… 3: analysis Safety proc… <NA>          NA
+#> /tmp/RtmpcgVIC0/projects/p0003
+#> # A tibble: 1 × 6
+#>      id title               stage       status deadline_type deadline
+#>   <int> <chr>               <prjstg>    <chr>  <chr>         <dttm>  
+#> 1     3 Understanding Radon 3: analysis Safet… <NA>          NA
 #> 
 #> New project's authors:
-#> # A tibble: 1 x 7
+#> # A tibble: 1 × 7
 #>   author_id last_name given_names title   degree email phone       
 #>       <int> <chr>     <chr>       <chr>   <chr>  <chr> <chr>       
 #> 1        86 Curie     Marie       Chemist <NA>   <NA>  553-867-5309
-#> # A tibble: 1 x 3
+#> # A tibble: 1 × 3
 #>   current_owner corresp_auth creator  
 #>   <prjaut>      <prjaut>     <prjaut> 
 #> 1 86: Curie     86: Curie    86: Curie
@@ -723,13 +723,13 @@ Here is the list of all projects that have been created:
 
 ``` r
 projects()
-#> # A tibble: 4 x 6
-#>      id title                 current_owner status        stage           impact
-#>   <int> <chr>                 <prjaut>      <chr>         <prjstg>         <dbl>
-#> 1  1945 How I Learned to Sto… 1337: Carver  debating lea… 5: under review     NA
-#> 2     2 Weighing the Crown    2: Archimedes just created  4: manuscript       NA
-#> 3     3 Understanding Radon   86: Curie     Safety proce… 3: analysis         NA
-#> 4     1 Achieving Cold Fusion 1337: Carver  just created  1: design           NA
+#> # A tibble: 4 × 6
+#>      id title                        current_owner status stage           impact
+#>   <int> <chr>                        <prjaut>      <chr>  <prjstg>         <dbl>
+#> 1  1945 How I Learned to Stop Worry… 1337: Carver  debat… 5: under review     NA
+#> 2     2 Weighing the Crown           2: Archimedes just … 4: manuscript       NA
+#> 3     3 Understanding Radon          86: Curie     Safet… 3: analysis         NA
+#> 4     1 Achieving Cold Fusion        1337: Carver  just … 1: design           NA
 ```
 
 Projects, authors, and affiliations can all be edited with their
@@ -818,12 +818,12 @@ the argument `verbose = TRUE`):
 
 ``` r
 projects(verbose = TRUE) %>% select(id, short_title, path)
-#> # A tibble: 3 x 3
+#> # A tibble: 3 × 3
 #>      id short_title     path                                     
 #>   <int> <chr>           <chr>                                    
-#> 1  1945 Dr. Strangelove /tmp/RtmpjCNxOS/projects/top_secret/p1945
-#> 2     2 Eureka!         /tmp/RtmpjCNxOS/projects/p0002           
-#> 3     3 Rn86            /tmp/RtmpjCNxOS/projects/p0003
+#> 1  1945 Dr. Strangelove /tmp/RtmpcgVIC0/projects/top_secret/p1945
+#> 2     2 Eureka!         /tmp/RtmpcgVIC0/projects/p0002           
+#> 3     3 Rn86            /tmp/RtmpcgVIC0/projects/p0003
 ```
 
 Users can also create subdirectories with the function
@@ -833,7 +833,7 @@ Users can also create subdirectories with the function
 new_project_group("Greek_studies/ancient_studies")
 #> 
 #> The following directory was created:
-#> /tmp/RtmpjCNxOS/projects/Greek_studies/ancient_studies
+#> /tmp/RtmpcgVIC0/projects/Greek_studies/ancient_studies
 ```
 
 If a project has already been created, it can be moved **not** with
@@ -845,41 +845,41 @@ its `id`, folder name (which, again, is based on its `id`), `path`
 
 ``` r
 move_project("Crown", path = "Greek_studies/ancient_studies")
-#> # A tibble: 1 x 12
-#>      id title short_title current_owner status deadline_type deadline           
-#>   <int> <chr> <chr>       <prjaut>      <chr>  <chr>         <dttm>             
-#> 1     2 Weig… Eureka!     2: Archimedes just … <NA>          NA                 
-#> # … with 5 more variables: stage <prjstg>, impact <dbl>, path <chr>,
+#> # A tibble: 1 × 12
+#>      id title short_title current_owner status deadline_type deadline
+#>   <int> <chr> <chr>       <prjaut>      <chr>  <chr>         <dttm>  
+#> 1     2 Weig… Eureka!     2: Archimedes just … <NA>          NA      
+#> # ℹ 5 more variables: stage <prjstg>, impact <dbl>, path <chr>,
 #> #   corresp_auth <prjaut>, creator <prjaut>
 #> 
 #> Project 2 moved so that its new path is
-#> /tmp/RtmpjCNxOS/projects/Greek_studies/ancient_studies/p0002
+#> /tmp/RtmpcgVIC0/projects/Greek_studies/ancient_studies/p0002
 
 copy_project(
   project_to_copy = "Radon",
   path = "dangerous_studies/radioactive_studies/radon_studies", 
   make_directories = TRUE
 )
-#> # A tibble: 1 x 12
-#>      id title short_title current_owner status deadline_type deadline           
-#>   <int> <chr> <chr>       <prjaut>      <chr>  <chr>         <dttm>             
-#> 1     3 Unde… Rn86        86: Curie     Safet… <NA>          NA                 
-#> # … with 5 more variables: stage <prjstg>, impact <dbl>, path <chr>,
+#> # A tibble: 1 × 12
+#>      id title short_title current_owner status deadline_type deadline
+#>   <int> <chr> <chr>       <prjaut>      <chr>  <chr>         <dttm>  
+#> 1     3 Unde… Rn86        86: Curie     Safet… <NA>          NA      
+#> # ℹ 5 more variables: stage <prjstg>, impact <dbl>, path <chr>,
 #> #   corresp_auth <prjaut>, creator <prjaut>
 #> 
 #> Project 4 below is a copy of project 3 and is located at
-#> /tmp/RtmpjCNxOS/projects/dangerous_studies/radioactive_studies/radon_studies/p0004
-#> # A tibble: 1 x 12
-#>      id title short_title current_owner status deadline_type deadline           
-#>   <int> <chr> <lgl>       <prjaut>      <chr>  <chr>         <dttm>             
-#> 1     4 Unde… NA          86: Curie     Safet… <NA>          NA                 
-#> # … with 5 more variables: stage <prjstg>, impact <dbl>, path <chr>,
+#> /tmp/RtmpcgVIC0/projects/dangerous_studies/radioactive_studies/radon_studies/p0004
+#> # A tibble: 1 × 12
+#>      id title short_title current_owner status deadline_type deadline
+#>   <int> <chr> <lgl>       <prjaut>      <chr>  <chr>         <dttm>  
+#> 1     4 Unde… NA          86: Curie     Safet… <NA>          NA      
+#> # ℹ 5 more variables: stage <prjstg>, impact <dbl>, path <chr>,
 #> #   corresp_auth <prjaut>, creator <prjaut>
 #> 
 #> The .Rproj file
-#> /tmp/RtmpjCNxOS/projects/dangerous_studies/radioactive_studies/radon_studies/p0004/p0003.Rproj
+#> /tmp/RtmpcgVIC0/projects/dangerous_studies/radioactive_studies/radon_studies/p0004/p0003.Rproj
 #> was renamed to
-#> /tmp/RtmpjCNxOS/projects/dangerous_studies/radioactive_studies/radon_studies/p0004/p0004.Rproj
+#> /tmp/RtmpcgVIC0/projects/dangerous_studies/radioactive_studies/radon_studies/p0004/p0004.Rproj
 #> 
 #> Be sure to change all instances of "p0003" to "p0004" as desired
 #> (e.g., .bib files and references to them in YAML headers).
@@ -887,12 +887,12 @@ copy_project(
 
 ``` r
 projects(c("Crown", "Radon"), verbose = TRUE) %>% select(id, title, path)
-#> # A tibble: 3 x 3
-#>      id title           path                                                    
-#>   <int> <chr>           <chr>                                                   
-#> 1     2 Weighing the C… /tmp/RtmpjCNxOS/projects/Greek_studies/ancient_studies/…
-#> 2     4 Understanding … /tmp/RtmpjCNxOS/projects/dangerous_studies/radioactive_…
-#> 3     3 Understanding … /tmp/RtmpjCNxOS/projects/p0003
+#> # A tibble: 3 × 3
+#>      id title               path                                                
+#>   <int> <chr>               <chr>                                               
+#> 1     2 Weighing the Crown  /tmp/RtmpcgVIC0/projects/Greek_studies/ancient_stud…
+#> 2     3 Understanding Radon /tmp/RtmpcgVIC0/projects/p0003                      
+#> 3     4 Understanding Radon /tmp/RtmpcgVIC0/projects/dangerous_studies/radioact…
 ```
 
 Projects can also be archived; they are moved into a subdirectory called
@@ -902,15 +902,15 @@ created.
 
 ``` r
 archive_project("Strangelove")
-#> # A tibble: 1 x 12
+#> # A tibble: 1 × 12
 #>      id title short_title current_owner status deadline_type deadline           
 #>   <int> <chr> <chr>       <prjaut>      <chr>  <chr>         <dttm>             
 #> 1  1945 How … Dr. Strang… 1337: Carver  debat… 2nd revision  2030-10-08 00:00:00
-#> # … with 5 more variables: stage <prjstg>, impact <dbl>, path <chr>,
+#> # ℹ 5 more variables: stage <prjstg>, impact <dbl>, path <chr>,
 #> #   corresp_auth <prjaut>, creator <prjaut>
 #> 
 #> The above project was archived and has the file path
-#> /tmp/RtmpjCNxOS/projects/top_secret/archive/p1945
+#> /tmp/RtmpcgVIC0/projects/top_secret/archive/p1945
 ```
 
 When a project is archived, it is no longer included in `projects()`
@@ -918,21 +918,21 @@ output unless the user sets `archived = TRUE`.
 
 ``` r
 projects(verbose = TRUE) %>% select(id, short_title, path)
-#> # A tibble: 3 x 3
+#> # A tibble: 3 × 3
 #>      id short_title path                                                        
 #>   <int> <chr>       <chr>                                                       
-#> 1     2 Eureka!     /tmp/RtmpjCNxOS/projects/Greek_studies/ancient_studies/p0002
-#> 2     4 <NA>        /tmp/RtmpjCNxOS/projects/dangerous_studies/radioactive_stud…
-#> 3     3 Rn86        /tmp/RtmpjCNxOS/projects/p0003
+#> 1     2 Eureka!     /tmp/RtmpcgVIC0/projects/Greek_studies/ancient_studies/p0002
+#> 2     3 Rn86        /tmp/RtmpcgVIC0/projects/p0003                              
+#> 3     4 <NA>        /tmp/RtmpcgVIC0/projects/dangerous_studies/radioactive_stud…
 
 projects(verbose = TRUE, archived = TRUE) %>% select(id, short_title, path)
-#> # A tibble: 4 x 3
-#>      id short_title    path                                                     
-#>   <int> <chr>          <chr>                                                    
-#> 1  1945 Dr. Strangelo… /tmp/RtmpjCNxOS/projects/top_secret/archive/p1945        
-#> 2     2 Eureka!        /tmp/RtmpjCNxOS/projects/Greek_studies/ancient_studies/p…
-#> 3     4 <NA>           /tmp/RtmpjCNxOS/projects/dangerous_studies/radioactive_s…
-#> 4     3 Rn86           /tmp/RtmpjCNxOS/projects/p0003
+#> # A tibble: 4 × 3
+#>      id short_title     path                                                    
+#>   <int> <chr>           <chr>                                                   
+#> 1  1945 Dr. Strangelove /tmp/RtmpcgVIC0/projects/top_secret/archive/p1945       
+#> 2     2 Eureka!         /tmp/RtmpcgVIC0/projects/Greek_studies/ancient_studies/…
+#> 3     3 Rn86            /tmp/RtmpcgVIC0/projects/p0003                          
+#> 4     4 <NA>            /tmp/RtmpcgVIC0/projects/dangerous_studies/radioactive_…
 ```
 
 Project contributors can utilize the `tasks()` table to manage tasks
@@ -949,10 +949,10 @@ new_task(
 )
 #> 
 #> New task was added to project 2:
-#> # A tibble: 1 x 8
-#>     PID   TID  done task             effort timing lead          status         
-#>   <int> <dbl> <int> <chr>             <dbl>  <dbl> <prjaut>      <chr>          
-#> 1     2     1     0 Retrieve the cr…      2     NA 2: Archimedes Waiting on the…
+#> # A tibble: 1 × 8
+#>     PID   TID  done task                      effort timing lead          status
+#>   <int> <dbl> <int> <chr>                      <dbl>  <dbl> <prjaut>      <chr> 
+#> 1     2     1     0 Retrieve the crown from …      2     NA 2: Archimedes Waiti…
 
 new_task(
   project = "Eureka",
@@ -963,25 +963,25 @@ new_task(
 )
 #> 
 #> New task was added to project 2:
-#> # A tibble: 2 x 8
-#>     PID   TID  done task             effort timing lead          status         
-#>   <int> <dbl> <int> <chr>             <dbl>  <dbl> <prjaut>      <chr>          
-#> 1     2     1     0 Rehabilitate th…     22     NA 1: Bug        <NA>           
-#> 2     2     2     0 Retrieve the cr…      2     NA 2: Archimedes Waiting on the…
+#> # A tibble: 2 × 8
+#>     PID   TID  done task                      effort timing lead          status
+#>   <int> <dbl> <int> <chr>                      <dbl>  <dbl> <prjaut>      <chr> 
+#> 1     2     1     0 Rehabilitate the horse        22     NA 1: Bug        <NA>  
+#> 2     2     2     0 Retrieve the crown from …      2     NA 2: Archimedes Waiti…
 
 edit_task(project = "Crown", TID = 1, timing = pi)
 #> 
 #> Updated task list for project 2:
-#> # A tibble: 2 x 8
-#>     PID   TID  done task             effort timing lead          status         
-#>   <int> <int> <int> <chr>             <dbl>  <dbl> <prjaut>      <chr>          
-#> 1     2     1     0 Rehabilitate th…     22   3.14 1: Bug        <NA>           
-#> 2     2     2     0 Retrieve the cr…      2  NA    2: Archimedes Waiting on the…
+#> # A tibble: 2 × 8
+#>     PID   TID  done task                      effort timing lead          status
+#>   <int> <int> <int> <chr>                      <dbl>  <dbl> <prjaut>      <chr> 
+#> 1     2     1     0 Rehabilitate the horse        22   3.14 1: Bug        <NA>  
+#> 2     2     2     0 Retrieve the crown from …      2  NA    2: Archimedes Waiti…
 
 new_task(project = 4, task = "collect the radon", lead = "scott bug")
 #> 
 #> New task was added to project 4:
-#> # A tibble: 1 x 8
+#> # A tibble: 1 × 8
 #>     PID   TID  done task              effort timing lead     status
 #>   <int> <dbl> <int> <chr>              <dbl>  <dbl> <prjaut> <chr> 
 #> 1     4     1     0 collect the radon     NA     NA 1: Bug   <NA>
@@ -990,19 +990,19 @@ new_task(project = 4, task = "collect the radon", lead = "scott bug")
 finish(4, 1)
 #> 
 #> Updated task list for project 4:
-#> # A tibble: 1 x 8
+#> # A tibble: 1 × 8
 #>     PID   TID  done task              effort timing lead     status
 #>   <int> <int> <int> <chr>              <dbl>  <dbl> <prjaut> <chr> 
 #> 1     4     1     1 collect the radon     NA     NA 1: Bug   <NA>
 
 tasks()
-#> # A tibble: 3 x 11
-#>     PID project     PI            impact   TID  done task          effort timing
-#>   <int> <chr>       <prjaut>       <dbl> <int> <int> <chr>          <dbl>  <dbl>
-#> 1     2 Weighing t… 2: Archimedes     NA     1     0 Rehabilitate…     22   3.14
-#> 2     2 Weighing t… 2: Archimedes     NA     2     0 Retrieve the…      2  NA   
-#> 3     4 Understand… 86: Curie         NA     1     1 collect the …     NA  NA   
-#> # … with 2 more variables: lead <prjaut>, status <chr>
+#> # A tibble: 3 × 11
+#>     PID project             PI            impact   TID  done task  effort timing
+#>   <int> <chr>               <prjaut>       <dbl> <int> <int> <chr>  <dbl>  <dbl>
+#> 1     2 Weighing the Crown  2: Archimedes     NA     1     0 Reha…     22   3.14
+#> 2     2 Weighing the Crown  2: Archimedes     NA     2     0 Retr…      2  NA   
+#> 3     4 Understanding Radon 86: Curie         NA     1     1 coll…     NA  NA   
+#> # ℹ 2 more variables: lead <prjaut>, status <chr>
 ```
 
 Like the other metadata-viewing functions, the user can filter tasks()
@@ -1010,23 +1010,23 @@ by project, by lead, or both:
 
 ``` r
 tasks(project = 4)
-#> # A tibble: 1 x 11
-#>     PID project  PI        impact   TID  done task   effort timing lead   status
-#>   <int> <chr>    <prjaut>   <dbl> <int> <int> <chr>   <dbl>  <dbl> <prja> <chr> 
-#> 1     4 Underst… 86: Curie     NA     1     1 colle…     NA     NA 1: Bug <NA>
+#> # A tibble: 1 × 11
+#>     PID project   PI        impact   TID  done task  effort timing lead   status
+#>   <int> <chr>     <prjaut>   <dbl> <int> <int> <chr>  <dbl>  <dbl> <prja> <chr> 
+#> 1     4 Understa… 86: Curie     NA     1     1 coll…     NA     NA 1: Bug <NA>
 tasks(lead = "bug")
-#> # A tibble: 2 x 11
-#>     PID project   PI            impact   TID  done task     effort timing lead  
-#>   <int> <chr>     <prjaut>       <dbl> <int> <int> <chr>     <dbl>  <dbl> <prja>
-#> 1     2 Weighing… 2: Archimedes     NA     1     0 Rehabil…     22   3.14 1: Bug
-#> 2     4 Understa… 86: Curie         NA     1     1 collect…     NA  NA    1: Bug
-#> # … with 1 more variable: status <chr>
+#> # A tibble: 2 × 11
+#>     PID project      PI            impact   TID  done task  effort timing lead  
+#>   <int> <chr>        <prjaut>       <dbl> <int> <int> <chr>  <dbl>  <dbl> <prja>
+#> 1     2 Weighing th… 2: Archimedes     NA     1     0 Reha…     22   3.14 1: Bug
+#> 2     4 Understandi… 86: Curie         NA     1     1 coll…     NA  NA    1: Bug
+#> # ℹ 1 more variable: status <chr>
 tasks(project = "Eureka", lead = 1)
-#> # A tibble: 1 x 11
-#>     PID project   PI            impact   TID  done task     effort timing lead  
-#>   <int> <chr>     <prjaut>       <dbl> <int> <int> <chr>     <dbl>  <dbl> <prja>
-#> 1     2 Weighing… 2: Archimedes     NA     1     0 Rehabil…     22   3.14 1: Bug
-#> # … with 1 more variable: status <chr>
+#> # A tibble: 1 × 11
+#>     PID project      PI            impact   TID  done task  effort timing lead  
+#>   <int> <chr>        <prjaut>       <dbl> <int> <int> <chr>  <dbl>  <dbl> <prja>
+#> 1     2 Weighing th… 2: Archimedes     NA     1     0 Reha…     22   3.14 1: Bug
+#> # ℹ 1 more variable: status <chr>
 ```
 
 Lastly, affiliations, authors, tasks and projects can be deleted with
@@ -1038,50 +1038,47 @@ folder. Use the `delete_*()` functions with caution.
 
 ``` r
 delete_affiliation("north science")
-#> # A tibble: 1 x 4
-#>      id department_name      institution_name        address                    
-#>   <int> <chr>                <chr>                   <chr>                      
-#> 1     1 Department of Physi… University of North Sc… 314 Newton Blvd, Springfie…
-#> # A tibble: 1 x 4
-#>      id department_name      institution_name        address                    
-#>   <int> <chr>                <chr>                   <chr>                      
-#> 1     1 Department of Physi… University of North Sc… 314 Newton Blvd, Springfie…
+#> # A tibble: 1 × 4
+#>      id department_name       institution_name            address               
+#>   <int> <chr>                 <chr>                       <chr>                 
+#> 1     1 Department of Physics University of North Science 314 Newton Blvd, Spri…
+#> # A tibble: 1 × 4
+#>      id department_name       institution_name            address               
+#>   <int> <chr>                 <chr>                       <chr>                 
+#> 1     1 Department of Physics University of North Science 314 Newton Blvd, Spri…
 #> The above affiliation was deleted.
 delete_author(2)
-#> # A tibble: 1 x 7
+#> # A tibble: 1 × 7
 #>      id last_name  given_names title         degree email phone
 #>   <int> <chr>      <chr>       <chr>         <chr>  <chr> <chr>
 #> 1     2 Archimedes <NA>        Mathematician <NA>   <NA>  <NA> 
-#> # A tibble: 1 x 7
+#> # A tibble: 1 × 7
 #>      id last_name  given_names title         degree email phone
 #>   <int> <chr>      <chr>       <chr>         <chr>  <chr> <chr>
 #> 1     2 Archimedes <NA>        Mathematician <NA>   <NA>  <NA>
 #> The above author was deleted.
 delete_project("Crown")
-#> # A tibble: 1 x 12
-#>      id title short_title current_owner status deadline_type deadline           
-#>   <int> <chr> <chr>       <prjaut>      <chr>  <chr>         <dttm>             
-#> 1     2 Weig… Eureka!     NA            just … <NA>          NA                 
-#> # … with 5 more variables: stage <prjstg>, impact <dbl>, path <chr>,
+#> # A tibble: 1 × 12
+#>      id title short_title current_owner status deadline_type deadline
+#>   <int> <chr> <chr>       <prjaut>      <chr>  <chr>         <dttm>  
+#> 1     2 Weig… Eureka!     NA            just … <NA>          NA      
+#> # ℹ 5 more variables: stage <prjstg>, impact <dbl>, path <chr>,
 #> #   corresp_auth <prjaut>, creator <prjaut>
-#> # A tibble: 1 x 12
-#>      id title short_title current_owner status deadline_type deadline           
-#>   <int> <chr> <chr>       <prjaut>      <chr>  <chr>         <dttm>             
-#> 1     2 Weig… Eureka!     NA            just … <NA>          NA                 
-#> # … with 5 more variables: stage <prjstg>, impact <dbl>, path <chr>,
+#> # A tibble: 1 × 12
+#>      id title short_title current_owner status deadline_type deadline
+#>   <int> <chr> <chr>       <prjaut>      <chr>  <chr>         <dttm>  
+#> 1     2 Weig… Eureka!     NA            just … <NA>          NA      
+#> # ℹ 5 more variables: stage <prjstg>, impact <dbl>, path <chr>,
 #> #   corresp_auth <prjaut>, creator <prjaut>
 #> 
 #> The above project was deleted.
 delete_task(project = 4, TID = 1)
-#> # A tibble: 1 x 9
-#>     PID   TID  done task           effort timing lead     status project        
-#>   <int> <int> <int> <chr>           <dbl>  <dbl> <prjaut> <chr>  <chr>          
-#> 1     4     1     1 collect the r…     NA     NA 1: Bug   <NA>   Understanding …
+#> # A tibble: 1 × 9
+#>     PID   TID  done task              effort timing lead     status project     
+#>   <int> <int> <int> <chr>              <dbl>  <dbl> <prjaut> <chr>  <chr>       
+#> 1     4     1     1 collect the radon     NA     NA 1: Bug   <NA>   Understandi…
 #> 
 #> No more tasks remaining for project 4
-#> # A tibble: 0 x 9
-#> # … with 9 variables: PID <int>, TID <int>, done <int>, task <chr>,
-#> #   effort <dbl>, timing <dbl>, lead <prjaut>, status <chr>, project <chr>
 ```
 
 # Conclusions
@@ -1093,15 +1090,15 @@ that keeps record of project details as well as team members’
 affiliations and contact information. For manuscripts, title pages are
 automatically generated from this database, and a selection of
 manuscript outlines compliant with reporting guidelines are available in
-R Markdown format. We believe that the `projectsetup` package may be useful
-for teams that manage multiple collaborative research projects in
+R Markdown format. We believe that the `projectsetup` package may be
+useful for teams that manage multiple collaborative research projects in
 various stages of development.
 
 # References
 
-<div id="refs" class="references">
+<div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-baker20161">
+<div id="ref-baker20161" class="csl-entry">
 
 Baker, Monya. 2016. “1,500 Scientists Lift the Lid on Reproducibility.”
 *Nature News* 533 (7604): 452.

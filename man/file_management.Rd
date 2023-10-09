@@ -126,7 +126,6 @@ and \code{rename_projects_folder()} changes its name.
 }
 \examples{
 #############################################################################
-# SETUP
 old_home <- Sys.getenv("HOME")
 old_ppath <- Sys.getenv("PROJECTSETUP_FOLDER_PATH")
 temp_dir <- tempfile("dir")
@@ -141,9 +140,9 @@ new_project_group("kidney/clinical")
 new_project_group("kidney/genomics")
 new_project_group("prostate/clinical")
 new_project_group("prostate/genomics")
-
-# Wrapped in if (interactive()) because it requires interactive console input
-# and fails automated package checking and testing.
+#'
+#' # Wrapped in if (interactive()) because it requires interactive console input
+#' # and fails automated package checking and testing.
 if (interactive()){
   new_project(title = "Sample Authorless Project", parent_directory = "kidney")
 
