@@ -256,136 +256,77 @@ create_projects_folder <- function(projects_folder_path) {
     )
   )
   
-  restore_templates_2(projects_folder_path)
+  restore_templates_files(projects_folder_path)
+  restore_templates_dir(projects_folder_path)
   restore_metadata(projects_folder_path)
 }
 
 
-restore_templates <- function(projects_folder_path) {
+#' @import R.AnalytiCyte
+restore_templates_files <- function(projects_folder_path) {
   purrr::pwalk(
-    .l =
-      list(
-        template_name =
-          c(
-            "CONSORT_protocol.Rmd",
-            "STROBE_protocol.Rmd",
-            "pXXXX.Rproj",
-            "01_protocol.Rmd",
-            "02_datawork.Rmd",
-            "03_analysis.Rmd",
-            "04_report.Rmd",
-            "style.css",
-            "styles.docx",
-            "citations.bib"
-          ),
-        template_source =
-          c(
-            "CONSORT_protocol.Rmd",
-            "STROBE_protocol.Rmd",
-            "pXXXX.Rproj",
-            "STROBE_protocol.Rmd",
-            "02_datawork.Rmd",
-            "03_analysis.Rmd",
-            "04_report.Rmd",
-            "style.css",
-            "styles.docx",
-            "citations.bib"
-          ),
-        subfolder =
-          c(
-            "",
-            "",
-            "default_folder",
-            "default_folder/progs",
-            "default_folder/progs",
-            "default_folder/progs",
-            "default_folder/progs",
-            "default_folder/progs",
-            "default_folder/progs",
-            "default_folder/progs"
-          )
+    .l = list(
+      template_name = c(
+        "pXXXX.Rproj",
+        "copy_Parent.qmd",
+        "copy_QC.qmd",
+        "copy_DA.qmd",
+        "copy_DS.qmd"
       ),
-    .f =
-      function(template_name, template_source, subfolder) {
+      template_source = c(
+        "pXXXX.Rproj",
+        "copy_Parent.qmd",
+        "copy_QC.qmd",
+        "copy_DA.qmd",
+        "copy_DS.qmd"
+      ),
+      subfolder = c(
+        "default_folder",
+        "default_folder/progs",
+        "default_folder/progs",
+        "default_folder/progs",
+        "default_folder/progs"
+      )
+    ),
+    .f = function(template_name, template_source, subfolder) {
+      template_path <- fs::path(projects_folder_path, ".templates", subfolder, template_name)
+      
+      if (!fs::file_exists(template_path)) {
+        template_source <- system.file("report", template_source, package = "R.AnalytiCyte", mustWork = TRUE)
         
-        template_path <-
-          fs::path(projects_folder_path, ".templates", subfolder, template_name)
-        
-        if (!fs::file_exists(template_path)) {
-          
-          template_source <-
-            system.file(
-              "templates",
-              template_source,
-              package = "projectsetup",
-              mustWork = TRUE
-            )
-          
-          fs::file_copy(template_source, template_path)
-        }
+        fs::file_copy(template_source, template_path)
       }
+    }
   )
 }
 
 #' @import R.AnalytiCyte
-restore_templates_2 <- function(projects_folder_path) {
+restore_templates_dir <- function(projects_folder_path) {
   purrr::pwalk(
-    .l =
-      list(
-        template_name =
-          c(
-            "pXXXX.Rproj",
-            "copy_Parent.qmd" ,
-            "copy_QC.qmd" ,
-            "copy_DA.qmd" ,
-            "copy_DS.qmd"  
-          ),
-        template_source =
-          c(
-            "pXXXX.Rproj",
-            "copy_Parent.qmd" ,
-            "copy_QC.qmd" ,
-            "copy_DA.qmd" ,
-            "copy_DS.qmd"  
-          ),
-        subfolder =
-          c(
-            "default_folder",
-            "default_folder/progs",
-            "default_folder/progs",
-            "default_folder/progs",
-            "default_folder/progs"
-          )
+    .l = list(
+      template_name = c(
+        "_extensions",
+        "www"
       ),
-    .f =
-      function(template_name, template_source, subfolder) {
+      template_source = c(
+        "_extensions",
+        "www"
+      ),
+      subfolder = c(
+        "default_folder/progs",  # Subfolder for _extensions
+        "default_folder/progs"   # Subfolder for www
+      )
+    ),
+    .f = function(template_name, template_source, subfolder) {
+      template_path <- fs::path(projects_folder_path, ".templates", subfolder, template_name)
+      
+      if (!fs::dir_exists(template_path)) {
+        template_source <- system.file("report", template_source, package = "R.AnalytiCyte", mustWork = TRUE)
         
-        template_path <-
-          fs::path(projects_folder_path, ".templates", subfolder, template_name)
-        
-        if (!fs::file_exists(template_path)) {
-          
-          template_source <-
-            system.file(
-              "report",
-              template_source,
-              package = "R.AnalytiCyte",
-              mustWork = TRUE
-            )
-          
-          
-          # template_source <-
-          #   system.file(
-          #     "report",
-          #     template_source,
-          #     package = "projectsetup",
-          #     mustWork = TRUE
-          #   )
-          
-          
-          fs::file_copy(template_source, template_path)
-        }
+        fs::dir_copy(template_source, template_path)
+
       }
+    }
   )
 }
 

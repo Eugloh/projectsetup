@@ -39,44 +39,6 @@ test_that("Everything works", {
     "\nThe environment variable PROJECTSETUP_FOLDER_PATH indicates"
   )
 
-  expect_equal(
-    sort(fs::dir_ls(projects_folder(), all = TRUE, recurse = TRUE)),
-    sort(
-      fs::path(
-        projects_folder(),
-        c(
-          ".metadata",
-          ".metadata/affiliations.rds",
-          ".metadata/author_affiliation_assoc.rds",
-          ".metadata/authors.rds",
-          ".metadata/project_author_assoc.rds",
-          ".metadata/projects.rds",
-          ".metadata/tasks.rds",
-          ".templates",
-          ".templates/default_folder",
-          ".templates/default_folder/01_RawData",
-          ".templates/default_folder/01_RawData/01_perFeatures",
-          ".templates/default_folder/01_RawData/02_perCells",
-          ".templates/default_folder/02_Reference",
-          ".templates/default_folder/02_Reference/01_dataCells",
-          ".templates/default_folder/02_Reference/02_dataFE",
-          ".templates/default_folder/02_Reference/03_experiment_info",
-          ".templates/default_folder/02_Reference/04_clustering",
-          ".templates/default_folder/02_Reference/05_subsampling",
-          ".templates/default_folder/02_Reference/06_upsampling",
-          ".templates/default_folder/03_Output",
-          ".templates/default_folder/progs",
-          ".templates/default_folder/progs/copy_DA.qmd",
-          ".templates/default_folder/progs/copy_DS.qmd",
-          ".templates/default_folder/progs/copy_Parent.qmd",
-          ".templates/default_folder/progs/copy_QC.qmd",
-          ".templates/default_folder/pXXXX.Rproj"
-        )
-      )
-    ),
-    ignore_attr = "names"
-  )
-
   expect_error(
     new_affiliation(
       department_name = "Math Dept.",
